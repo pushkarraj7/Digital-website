@@ -10,6 +10,7 @@ import { DigitalExperience } from "../components/sections/DigitalExperience";
 import { WhyMVM } from "../components/sections/WhyMVM";
 import { Testimonials } from "../components/sections/Testimonials";
 import { FinalCTA } from "../components/sections/FinalCTA";
+import { EnquiryForm } from "../components/sections/EnquiryForm";
 
 // Section order follows the spec's narrative:
 // Attention -> Strategy -> Creation -> Distribution -> Conversion -> Growth.
@@ -29,7 +30,8 @@ export function Home() {
       <DigitalExperience />
       <WhyMVM />
       <Testimonials />
-      <FinalCTA />
+      {/* <FinalCTA /> */}
+      <EnquiryForm />
     </>
   );
 }

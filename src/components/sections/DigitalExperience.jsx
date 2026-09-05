@@ -57,7 +57,7 @@ export function DigitalExperience() {
           How it comes together
         </p>
         <h2 className="mt-4 max-w-xl font-display text-3xl font-semibold text-ink sm:text-5xl">
-          Web development &amp; 360 experiences
+          What a visitor actually experiences
         </h2>
 
         <div className="relative mt-16 bg-void overflow-hidden rounded-2xl border border-line">

@@ -207,11 +207,12 @@ export function ServicesExperience() {
       <div className="mx-auto max-w-6xl">
         <div className="max-w-2xl">
           <h2 className="font-display text-4xl font-semibold text-ink sm:text-5xl">
-            One system. Every discipline.
+            One team. 10+ disciplines.
           </h2>
           <p className="mt-5 text-base text-mist sm:text-lg">
-            Ten disciplines, one team — everything MVM Digital brings to the
-            table.
+            No handoffs between agencies, no juggling five different vendors —
+            just one team that covers strategy, branding, and everything in
+            between.
           </p>
         </div>
       </div>

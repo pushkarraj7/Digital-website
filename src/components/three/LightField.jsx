@@ -1,13 +1,17 @@
 import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
-import * as THREE from 'three';
+import * as THREE from "three";
 
 /**
  * A soft, low-opacity light source that drifts toward the cursor,
  * giving the particle field something to catch light from. Kept as a
  * single mesh — cheap to render, does the atmospheric heavy lifting.
  */
-export function LightField({ mouseRef, color = "#0C2959" }) {
+export function LightField({
+  mouseRef,
+  color = "#0C2959",
+  secondaryColor = "#7F5FFF",
+}) {
   const meshRef = useRef();
 
   useFrame((state) => {
@@ -31,6 +35,7 @@ export function LightField({ mouseRef, color = "#0C2959" }) {
         depthWrite={false}
         uniforms={{
           uColor: { value: new THREE.Color(color) },
+          uColor2: { value: new THREE.Color(secondaryColor) },
           uOpacity: { value: 0.4 },
         }}
         vertexShader={`
@@ -42,12 +47,14 @@ export function LightField({ mouseRef, color = "#0C2959" }) {
         `}
         fragmentShader={`
           uniform vec3 uColor;
+          uniform vec3 uColor2;
           uniform float uOpacity;
           varying vec2 vUv;
           void main() {
             float dist = distance(vUv, vec2(0.5));
             float falloff = smoothstep(0.5, 0.0, dist);
-            gl_FragColor = vec4(uColor, falloff * uOpacity);
+            vec3 mixed = mix(uColor, uColor2, smoothstep(0.0, 1.0, vUv.x));
+            gl_FragColor = vec4(mixed, falloff * uOpacity);
           }
         `}
       />

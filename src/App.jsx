@@ -12,6 +12,7 @@ import { ErrorBoundary } from "./components/layout/ErrorBoundary";
 
 import { Home } from "./pages/Home";
 import { CaseStudy } from "./pages/CaseStudy";
+import { NotFound } from "./pages/NotFound";
 
 import { useReducedMotion } from "./hooks/useReducedMotion";
 
@@ -34,6 +35,14 @@ function AnimatedRoutes() {
           element={
             <PageTransition>
               <CaseStudy />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="*"
+          element={
+            <PageTransition>
+              <NotFound />
             </PageTransition>
           }
         />

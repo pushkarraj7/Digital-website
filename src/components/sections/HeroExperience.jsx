@@ -38,7 +38,7 @@ export function HeroExperience() {
         }}
       />
 
-      <div className="relative z-10 mx-auto flex max-w-4xl flex-col items-center text-center">
+      <div className="relative z-10 mt-2 mx-auto flex max-w-4xl flex-col items-center text-center">
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}

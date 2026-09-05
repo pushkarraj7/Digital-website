@@ -11,15 +11,17 @@ import * as THREE from "three";
 export function ParticleField({
   mouseRef,
   count = 1400,
-  color = "#4E86FF",
+  colors = ["#4E86FF"],
   activeZone,
 }) {
   const pointsRef = useRef();
   const materialRef = useRef();
 
-  const { positions, seeds } = useMemo(() => {
+  const { positions, seeds, particleColors } = useMemo(() => {
     const positions = new Float32Array(count * 3);
     const seeds = new Float32Array(count);
+    const particleColors = new Float32Array(count * 3);
+    const palette = colors.map((c) => new THREE.Color(c));
     for (let i = 0; i < count; i++) {
       const i3 = i * 3;
       // Elongated, flattened cloud — wider than tall, subtle depth.
@@ -29,9 +31,14 @@ export function ParticleField({
       positions[i3 + 1] = Math.sin(theta) * radius * 0.6;
       positions[i3 + 2] = (Math.random() - 0.5) * 2.2;
       seeds[i] = Math.random() * Math.PI * 2;
+
+      const tint = palette[i % palette.length];
+      particleColors[i3] = tint.r;
+      particleColors[i3 + 1] = tint.g;
+      particleColors[i3 + 2] = tint.b;
     }
-    return { positions, seeds };
-  }, [count]);
+    return { positions, seeds, particleColors };
+  }, [count, colors]);
 
   const basePositions = useMemo(() => positions.slice(), [positions]);
 
@@ -91,10 +98,16 @@ export function ParticleField({
           array={positions}
           itemSize={3}
         />
+        <bufferAttribute
+          attach="attributes-color"
+          count={count}
+          array={particleColors}
+          itemSize={3}
+        />
       </bufferGeometry>
       <pointsMaterial
         ref={materialRef}
-        color={color}
+        vertexColors
         size={0.028}
         sizeAttenuation
         transparent

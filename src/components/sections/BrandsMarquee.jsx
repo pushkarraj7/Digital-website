@@ -1,8 +1,59 @@
 import { motion } from "framer-motion";
 
-// Placeholder logos — swap these letters/labels for real PNG imports later
-const ROW_ONE = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
-const ROW_TWO = ["K", "L", "M", "N", "O", "P", "Q", "R", "S", "T"];
+// Demo logo placeholders — abstract mark + fictional name, so nothing here
+// depends on real client logos. Swap DEMO_LOGOS for real client marks
+// (as <img> imports) once approved.
+const DEMO_LOGOS = [
+  { name: "Northfield", shape: "circle" },
+  { name: "Vantree", shape: "triangle" },
+  { name: "Solace Co.", shape: "square" },
+  { name: "Kindra", shape: "hex" },
+  { name: "Bureau 9", shape: "diamond" },
+  { name: "Fernway", shape: "circle" },
+  { name: "Amberlane", shape: "triangle" },
+  { name: "Loop & Co", shape: "square" },
+  { name: "Nordhaus", shape: "hex" },
+  { name: "Palet", shape: "diamond" },
+];
+
+const ROW_ONE = DEMO_LOGOS.slice(0, 5);
+const ROW_TWO = DEMO_LOGOS.slice(5, 10);
+
+function LogoMark({ shape }) {
+  const common = { width: 18, height: 18, fill: "currentColor" };
+  switch (shape) {
+    case "triangle":
+      return (
+        <svg viewBox="0 0 18 18" {...common}>
+          <polygon points="9,1 17,17 1,17" />
+        </svg>
+      );
+    case "square":
+      return (
+        <svg viewBox="0 0 18 18" {...common}>
+          <rect x="2" y="2" width="14" height="14" rx="3" />
+        </svg>
+      );
+    case "hex":
+      return (
+        <svg viewBox="0 0 18 18" {...common}>
+          <polygon points="9,1 16,5 16,13 9,17 2,13 2,5" />
+        </svg>
+      );
+    case "diamond":
+      return (
+        <svg viewBox="0 0 18 18" {...common}>
+          <polygon points="9,1 17,9 9,17 1,9" />
+        </svg>
+      );
+    default:
+      return (
+        <svg viewBox="0 0 18 18" {...common}>
+          <circle cx="9" cy="9" r="8" />
+        </svg>
+      );
+  }
+}
 
 function MarqueeRow({ logos, direction = "left", speed = 30 }) {
   // duplicated so the loop has no visible seam
@@ -18,13 +69,16 @@ function MarqueeRow({ logos, direction = "left", speed = 30 }) {
         }`}
         style={{ "--marquee-duration": `${speed}s` }}
       >
-        {track.map((letter, i) => (
+        {track.map((logo, i) => (
           <div
             key={i}
-            className="mr-8 flex h-9 w-20 shrink-0 items-center justify-center grayscale opacity-50 transition-all duration-300 hover:opacity-100 hover:grayscale-0 sm:mr-16 sm:h-12 sm:w-28"
+            className="mr-8 flex h-9 w-32 shrink-0 items-center justify-center gap-2 grayscale opacity-50 transition-all duration-300 hover:opacity-100 hover:grayscale-0 sm:mr-16 sm:h-12 sm:w-40"
           >
-            <span className="font-display text-lg font-semibold tracking-tight text-ink sm:text-2xl">
-              {letter}
+            <span className="text-ion">
+              <LogoMark shape={logo.shape} />
+            </span>
+            <span className="font-display text-sm font-semibold tracking-tight text-ink sm:text-base">
+              {logo.name}
             </span>
           </div>
         ))}
@@ -48,7 +102,8 @@ export function BrandsMarquee() {
             Trusted by
           </p>
           <h2 className="mt-3 font-display text-2xl font-semibold tracking-tight text-ink sm:text-4xl">
-            Brands we've <span className="italic text-ion">grown together</span>
+            Teams we've{" "}
+            <span className="italic text-ion">worked alongside</span>
           </h2>
         </motion.div>
 

@@ -4,9 +4,9 @@ export default {
   theme: {
     extend: {
       colors: {
-        void: "#05070B",
-        deep: "#0A0F1C",
-        surface: "#0D1526",
+        void: "#070A10",
+        deep: "#0D1220",
+        surface: "#11192C",
         brand: {
           DEFAULT: "#0C2959",
           light: "#163A73",
@@ -14,6 +14,8 @@ export default {
         },
         electric: "#4E86FF",
         ion: "#7FB4FF",
+        aurora: "#7F5FFF",
+        coral: "#FF8B6B",
         ink: "#F3F5F9",
         mist: "#8C95A8",
         haze: "#5A6478",

@@ -1,32 +1,57 @@
 import { motion } from "framer-motion";
-import { ArrowUp, Instagram, Linkedin, Twitter } from "lucide-react";
+import { ArrowUp, Facebook, Instagram, Linkedin, Youtube } from "lucide-react";
+import { Link } from "react-router-dom";
 import { BRAND, NAV_LINKS } from "../../lib/constants";
-import { SERVICE_CATEGORIES } from "../../data/services";
 import logo from "../../assets/mvm.png";
 
+// simple X (Twitter) logo — lucide doesn't ship this yet
+function XIcon({ className, strokeWidth }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+    </svg>
+  );
+}
+
 const SOCIALS = [
-  { label: "Instagram", href: "#", Icon: Instagram },
-  { label: "LinkedIn", href: "#", Icon: Linkedin },
-  { label: "X", href: "#", Icon: Twitter },
+  { label: "Facebook", href: "#", Icon: Facebook, color: "#1877F2" },
+  { label: "Instagram", href: "#", Icon: Instagram, color: "#E1306C" },
+  { label: "X", href: "#", Icon: XIcon, color: "#000000" },
+  { label: "YouTube", href: "#", Icon: Youtube, color: "#FF0000" },
+  { label: "LinkedIn", href: "#", Icon: Linkedin, color: "#0A66C2" },
 ];
 
-function FooterPillRow({ heading, items, getKey, getHref, getLabel }) {
+// Plain nav items (Home, About, Blog, Contact) vs dropdown items
+// (Services, Portfolio) get their own footer columns automatically —
+// keeps the footer in sync with the navbar without duplicating data.
+const PLAIN_LINKS = NAV_LINKS.filter((l) => !l.groups);
+const GROUPED_LINKS = NAV_LINKS.filter((l) => l.groups);
+
+function FooterColumn({ heading, children }) {
   return (
-    <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
-      <h3 className="w-24 shrink-0 text-sm font-medium text-ink">{heading}</h3>
-      <div className="flex flex-wrap gap-2.5">
-        {items.map((item) => (
-          <a
-            key={getKey(item)}
-            href={getHref(item)}
-            data-cursor="interactive"
-            className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 text-xs text-mist backdrop-blur-sm transition-colors duration-300 hover:border-ion/40 hover:bg-ion/10 hover:text-ink sm:px-4 sm:text-sm"
-          >
-            {getLabel(item)}
-          </a>
-        ))}
-      </div>
+    <div className="flex flex-col gap-4">
+      <h3 className="text-xs font-medium uppercase tracking-wide text-haze">
+        {heading}
+      </h3>
+      {children}
     </div>
+  );
+}
+
+function FooterLink({ to, children }) {
+  return (
+    <Link
+      to={to}
+      data-cursor="interactive"
+      className="text-sm text-mist transition-colors duration-300 hover:text-ion"
+    >
+      {children}
+    </Link>
   );
 }
 
@@ -34,7 +59,7 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative overflow-hidden border-t border-line bg-void px-4 pb-8 pt-10 sm:px-10 sm:pb-10 sm:pt-12">
+    <footer className="relative overflow-hidden border-t border-line bg-void px-4 pb-8 pt-14 sm:px-10 sm:pb-10 sm:pt-20">
       {/* top hairline glow, matches navbar/CTA accent */}
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-ion/50 to-transparent" />
 
@@ -53,94 +78,123 @@ export function Footer() {
       />
 
       <div className="relative mx-auto max-w-6xl">
-        <div className="flex flex-col gap-10 pb-8 sm:gap-16 sm:pb-10 lg:flex-row lg:items-start lg:justify-between">
-          {/* Left — Logo & About */}
+        <div className="grid grid-cols-1 items-start gap-10 pb-10 sm:gap-12 sm:pb-12 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
+          {/* Logo & About — spans first column, wider than the rest */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="max-w-md"
+            className="max-w-sm"
           >
-            <div className="lg:col-span-1">
-              <div
-                className="flex items-center gap-2.5"
-                data-cursor="interactive"
-              >
-                <img src={logo} alt={BRAND.name} className="h-8 w-auto" />
-              </div>
+            <Link
+              to="/"
+              className="flex items-center"
+              data-cursor="interactive"
+            >
+              <img
+                src={logo}
+                alt={BRAND.name}
+                className="h-16 w-auto brightness-0 invert sm:h-20"
+              />
+            </Link>
 
-              <h4 className="mt-4 font-display text-2xl font-semibold leading-[0.95] tracking-tight text-ink sm:text-3xl">
-                <span className="block italic">Turn Attention</span>
-                <span className="block font-medium italic text-ion">
-                  Into Growth.
-                </span>
-              </h4>
+            <h4 className="mt-5 font-display text-2xl font-semibold leading-[0.95] tracking-tight text-ink sm:text-3xl">
+              <span className="block italic">Turn Attention</span>
+              <span className="block font-medium italic text-ion">
+                Into Growth.
+              </span>
+            </h4>
 
-              <p className="mt-3 text-sm leading-relaxed text-mist">
-                A digital marketing and technology agency turning attention into
-                measurable growth, for brands across India and beyond.
-              </p>
-
-              {/* Socials */}
-              <div className="mt-7 flex gap-3">
-                {SOCIALS.map(({ label, href, Icon }) => (
-                  <motion.a
-                    key={label}
-                    href={href}
-                    aria-label={label}
-                    data-cursor="interactive"
-                    whileHover={{ y: -3 }}
-                    transition={{ duration: 0.25 }}
-                    className="group flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] backdrop-blur-sm transition-colors duration-300 hover:border-ion/40 hover:bg-ion/10 sm:h-10 sm:w-10"
-                  >
-                    <Icon
-                      className="h-4 w-4 text-mist transition-colors duration-300 group-hover:text-ion"
-                      strokeWidth={1.75}
-                    />
-                  </motion.a>
-                ))}
-              </div>
-            </div>
+            <p className="mt-4 text-sm leading-relaxed text-mist">
+              A digital marketing and technology agency turning attention into
+              measurable growth, for brands across India and beyond.
+            </p>
           </motion.div>
 
-          <div className="flex gap-12 lg:gap-16">
-            {/* Divider — desktop only */}
-            <div className="hidden self-stretch lg:block">
-              <div className="h-full w-px bg-gradient-to-b from-transparent via-white/10 to-transparent" />
-            </div>
+          {/* Quick links (Home / About / Blog / Contact) */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.05 }}
+          >
+            <FooterColumn heading="Navigate">
+              <div className="flex flex-col gap-3">
+                {PLAIN_LINKS.map((link) => (
+                  <FooterLink key={link.label} to={link.href}>
+                    {link.label}
+                  </FooterLink>
+                ))}
+              </div>
+            </FooterColumn>
+          </motion.div>
 
-            {/* Right — Footer Navigation */}
+          {/* Services + Portfolio — auto-generated from NAV_LINKS groups */}
+          {GROUPED_LINKS.map((group, i) => (
             <motion.div
+              key={group.label}
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
-              className="flex flex-col gap-5 border-t border-line/60 pb-10 pt-8 sm:pb-16 sm:pt-10 lg:border-t-0 lg:pb-0 lg:pt-0"
+              transition={{
+                duration: 0.6,
+                ease: "easeOut",
+                delay: 0.1 + i * 0.05,
+              }}
             >
-              <FooterPillRow
-                heading="Navigate"
-                items={NAV_LINKS}
-                getKey={(l) => l.href}
-                getHref={(l) => l.href}
-                getLabel={(l) => l.label}
-              />
-
-              <FooterPillRow
-                heading="Services"
-                items={SERVICE_CATEGORIES}
-                getKey={(c) => c.id}
-                getHref={() => "#services"}
-                getLabel={(c) => c.label}
-              />
+              <FooterColumn heading={group.label}>
+                <div className="flex flex-col gap-3">
+                  {group.groups.length === 1
+                    ? // Single group (Portfolio) — list its items directly.
+                      group.groups[0].items.map((item) => (
+                        <FooterLink key={item.href} to={item.href}>
+                          {item.label}
+                        </FooterLink>
+                      ))
+                    : // Multiple groups (Services) — list category names,
+                      // linking to the category's first item.
+                      group.groups.map((g) => (
+                        <FooterLink
+                          key={g.title}
+                          to={
+                            g.items[0].href.split("/").slice(0, -1).join("/") ||
+                            g.items[0].href
+                          }
+                        >
+                          {g.title}
+                        </FooterLink>
+                      ))}
+                </div>
+              </FooterColumn>
             </motion.div>
-          </div>
+          ))}
         </div>
 
-        <div className="flex flex-col gap-4 border-t border-line pt-6 sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:pt-8">
+        <div className="flex flex-col gap-6 border-t border-line pt-6 sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:pt-8">
           <p className="text-xs text-haze">
             © {year} {BRAND.name}. All rights reserved.
           </p>
+
+          <div className="flex gap-3">
+            {SOCIALS.map(({ label, href, Icon, color }) => (
+              <motion.a
+                key={label}
+                href={href}
+                aria-label={label}
+                data-cursor="interactive"
+                whileHover={{ y: -3 }}
+                transition={{ duration: 0.25 }}
+                style={{ "--brand-color": color }}
+                className="group flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] backdrop-blur-sm transition-colors duration-300 hover:border-[var(--brand-color)] hover:bg-[var(--brand-color)] sm:h-9 sm:w-9"
+              >
+                <Icon
+                  className="h-3.5 w-3.5 text-mist transition-colors duration-300 group-hover:text-white"
+                  strokeWidth={1.75}
+                />
+              </motion.a>
+            ))}
+          </div>
 
           <div className="flex items-center gap-6">
             <a

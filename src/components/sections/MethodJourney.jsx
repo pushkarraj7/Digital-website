@@ -21,7 +21,8 @@ const STEPS = [
   {
     id: "01",
     title: "Discover",
-    copy: "Understand the business, the market and where growth is actually hiding.",
+    short: "Understanding the business before touching anything else.",
+    copy: "Before we touch a single design file, we spend real time understanding the business — the market it's competing in, what customers actually think of it, and where growth is quietly leaking out.",
     color: "#22d3ee",
     icon: Compass,
     deliverables: [
@@ -33,7 +34,8 @@ const STEPS = [
   {
     id: "02",
     title: "Position",
-    copy: "Find the opportunity a competitor hasn't claimed yet.",
+    short: "Finding the angle nobody else in the category has claimed.",
+    copy: "Most categories are more crowded than they look. We dig for the angle a competitor hasn't claimed yet, and build messaging around that instead of repeating what everyone else is already saying.",
     color: "#6366f1",
     icon: Target,
     deliverables: [
@@ -45,7 +47,8 @@ const STEPS = [
   {
     id: "03",
     title: "Create",
-    copy: "Build the brand and the experience around it.",
+    short: "Building the brand and experience around that position.",
+    copy: "This is where the brand and the digital experience actually get built — identity, guidelines, and the website or product people will spend time in. Nothing here is arbitrary; every choice ties back to the positioning.",
     color: "#a78bfa",
     icon: Sparkles,
     deliverables: [
@@ -57,7 +60,8 @@ const STEPS = [
   {
     id: "04",
     title: "Activate",
-    copy: "Launch the campaigns and content that carry it.",
+    short: "Launching it properly across the channels that matter.",
+    copy: "A brand sitting quietly does nothing. We launch it properly — campaigns, content, and a channel plan built for where your audience actually spends their time, not a generic checklist.",
     color: "#f472b6",
     icon: Rocket,
     deliverables: [
@@ -69,7 +73,8 @@ const STEPS = [
   {
     id: "05",
     title: "Optimize",
-    copy: "Learn from real behavior, not assumptions.",
+    short: "Watching real behavior instead of relying on assumptions.",
+    copy: "Once real traffic and real customers are in the picture, assumptions stop mattering. We watch what the data actually shows and adjust — that's usually where the biggest wins are hiding.",
     color: "#fb923c",
     icon: LineChart,
     deliverables: [
@@ -81,7 +86,8 @@ const STEPS = [
   {
     id: "06",
     title: "Grow",
-    copy: "Scale what the data says is working.",
+    short: "Doubling down on what's proven to work, cutting what isn't.",
+    copy: "By this stage we know exactly which channels, creative, and campaigns are pulling their weight — so we double down on those and cut what isn't earning its budget.",
     color: "#34d399",
     icon: TrendingUp,
     deliverables: [
@@ -153,7 +159,10 @@ export function MethodJourney() {
             <h2 className="mt-4 font-display text-3xl font-semibold text-ink">
               How We Work
             </h2>
-            <p className="mt-3 text-sm text-mist">Six stages. One direction.</p>
+            <p className="mt-3 text-sm text-mist">
+              No two projects start from the same place, but the process that
+              gets them to results is the same six steps, every time.
+            </p>
 
             {isDesktop && (
               <div className="relative mt-10 flex flex-col">
@@ -234,7 +243,7 @@ export function MethodJourney() {
                           className="overflow-hidden"
                         >
                           <p className="mt-1.5 max-w-[210px] text-xs leading-relaxed text-mist">
-                            {step.copy}
+                            {step.short}
                           </p>
                         </motion.div>
                       </div>

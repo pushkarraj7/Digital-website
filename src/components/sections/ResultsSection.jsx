@@ -63,16 +63,16 @@ export function ResultsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
-          className="max-w-2xl"
+          className="max-w-4xl"
         >
           <p className="text-xs uppercase tracking-[0.2em] text-haze">
             Results
           </p>
           <h2 className="mt-4 font-display text-3xl font-semibold text-ink sm:text-5xl">
-            Creative gets attention.
+            Great work turns heads.
           </h2>
           <h2 className="font-display text-3xl font-semibold text-ion sm:text-5xl">
-            Performance keeps it.
+            Good numbers keep them turned.
           </h2>
         </motion.div>
 

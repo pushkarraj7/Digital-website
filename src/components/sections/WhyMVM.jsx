@@ -5,58 +5,58 @@ import { EASE } from "../../lib/animations";
 
 const PRINCIPLES = [
   {
-    title: "Strategy before execution",
-    copy: "Every creative decision should have a reason.",
+    title: "One team, not three agencies",
+    copy: "Your marketing team and your dev team are the same people.",
     detail:
-      "We start with research, positioning, and a clear brief — not a blank canvas. Design without strategy is just decoration.",
+      "Most businesses juggle a marketing agency, a separate web developer, and sometimes a third freelancer for design — each blaming the other when something breaks. Here, strategy, design, and build all sit under one roof, so nothing gets lost in translation.",
   },
   {
-    title: "Design with purpose",
-    copy: "Beautiful is good. Effective is better.",
+    title: "We build the tech, not just the ads",
+    copy: "Software, apps, and websites — in-house, not outsourced.",
     detail:
-      "Every pixel earns its place by moving a metric — attention, trust, or conversion. Aesthetics serve outcomes, not the other way around.",
+      "Most digital marketing teams stop at campaigns and content. We also build the actual product — your website, your booking system, your internal tools — so the marketing and the thing it's promoting are built by people who understand both.",
   },
   {
-    title: "Built around people",
-    copy: "Technology matters. Human behavior matters more.",
+    title: "We don't chase vanity metrics",
+    copy: "A million impressions mean nothing if nobody buys.",
     detail:
-      "We design for how people actually behave online — their patience, their attention span, their habits — not how we wish they would.",
+      "It's easy to make a number go up — followers, likes, page views. We only report on the ones that actually move your business forward, even if that number is smaller and less exciting to screenshot.",
   },
   {
-    title: "Optimize relentlessly",
-    copy: "Launch is not the finish line.",
+    title: "We say no sometimes",
+    copy: "Not every idea deserves a yes.",
     detail:
-      "Every product we ship is instrumented, measured, and iterated on. The first version is a hypothesis, not the answer.",
+      "If a request doesn't serve the actual goal — more inquiries, more sales, more trust — we'll tell you, even if it means turning down billable work.",
   },
   {
-    title: "One team, full stack",
-    copy: "Marketing and engineering, under one roof.",
+    title: "Real numbers, shared honestly",
+    copy: "Good weeks and bad weeks, both get reported.",
     detail:
-      "No handoffs between a design agency, a dev shop, and a marketing consultant. Strategy, build, and growth stay in sync because one team owns all three.",
+      "We're not going to hide a slow month behind a cherry-picked stat. You'll know what's actually working and what isn't, plainly.",
   },
   {
-    title: "Performance is a feature",
-    copy: "A slow site is a broken site.",
+    title: "Fewer channels, done properly",
+    copy: "Being everywhere badly beats nowhere at all.",
     detail:
-      "Every build is engineered for speed from day one — load times, Core Web Vitals, and mobile performance are treated as requirements, not afterthoughts.",
+      "We'd rather run two channels your audience actually uses really well than spread you thin across six because it looks comprehensive on a proposal.",
   },
   {
-    title: "Transparent by default",
-    copy: "You always know where things stand.",
+    title: "We test before we scale",
+    copy: "Small bets before big budget.",
     detail:
-      "Clear timelines, honest scoping, and direct access to the people doing the work — no account managers relaying messages, no black-box process.",
+      "Before we put real money behind an idea, we test it small and see if it actually holds up — not guess-and-hope with your whole quarter's spend.",
   },
   {
-    title: "Built to scale",
-    copy: "What we build today shouldn't block you tomorrow.",
+    title: "Direct access, no account managers",
+    copy: "You talk to the people doing the actual work.",
     detail:
-      "Clean architecture and documented systems mean your site or product can grow with the business, instead of needing a rebuild every couple of years.",
+      "No relaying messages through a middle layer that doesn't understand the technical or creative details. You get the person actually building or running your campaign.",
   },
   {
-    title: "Data over guesswork",
-    copy: "Decisions backed by numbers, not opinions.",
+    title: "Built to scale with you",
+    copy: "What we build today shouldn't block you in a year.",
     detail:
-      "From SEO to ad spend to UX changes, we test, track, and let performance data guide the next move — not whoever argues loudest in the room.",
+      "Clean, documented builds mean your site or systems can grow as your business does, instead of needing a expensive rebuild every time you outgrow the last one.",
   },
   {
     title: "Partners, not vendors",
@@ -76,15 +76,15 @@ export function WhyMVM() {
       </span>
 
       <div className="relative mx-auto max-w-6xl">
-        <div className="max-w-2xl">
+        <div className="max-w-4xl">
           <span className="font-mono text-xs uppercase tracking-[0.3em] text-ion">
             Why MVM
           </span>
           <h2 className="mt-4 font-display text-3xl font-semibold text-ink sm:text-5xl">
-            Not more noise.
+            Every agency says
           </h2>
           <h2 className="font-display text-3xl font-semibold text-mist sm:text-5xl">
-            More meaningful digital experiences.
+            they're different. Here's proof.
           </h2>
         </div>
 

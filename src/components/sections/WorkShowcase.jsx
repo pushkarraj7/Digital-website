@@ -38,9 +38,6 @@ export function WorkShowcase() {
               Selected work
             </h2>
           </div>
-          <p className="hidden max-w-[220px] text-right text-xs text-haze sm:block">
-            Placeholder projects — replace with live case studies
-          </p>
         </div>
 
         <div className="mt-10 grid grid-cols-1 gap-4 sm:mt-16 sm:grid-cols-2 sm:gap-6 lg:grid-cols-6">
