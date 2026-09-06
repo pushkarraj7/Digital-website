@@ -145,13 +145,13 @@ export function DigitalExperience() {
                       {isActive && (
                         <motion.span
                           key={activeIndex}
-                          initial={{ width: "0%" }}
-                          animate={{ width: "100%" }}
+                          initial={{ scaleX: 0 }}
+                          animate={{ scaleX: 1 }}
                           transition={{
                             duration: AUTO_ADVANCE_MS / 1000,
                             ease: "linear",
                           }}
-                          className="absolute inset-y-0 left-0 rounded-full"
+                          className="absolute inset-y-0 left-0 w-full origin-left rounded-full"
                           style={{ backgroundColor: stage.color }}
                         />
                       )}

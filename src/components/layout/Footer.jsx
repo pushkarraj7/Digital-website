@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowUp, Facebook, Instagram, Linkedin, Youtube } from "lucide-react";
 import { Link } from "react-router-dom";
 import { BRAND, NAV_LINKS } from "../../lib/constants";
-import logo from "../../assets/mvm.png";
+import logo from "../../assets/mvm.webp";
 
 // simple X (Twitter) logo — lucide doesn't ship this yet
 function XIcon({ className, strokeWidth }) {

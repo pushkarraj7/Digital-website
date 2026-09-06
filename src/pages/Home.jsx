@@ -1,16 +1,53 @@
+import { lazy, Suspense } from "react";
 import { HeroExperience } from "../components/sections/HeroExperience";
-import { AttentionSection } from "../components/sections/AttentionSection";
-import { ServicesExperience } from "../components/sections/ServicesExperience";
-import { BrandsMarquee } from "../components/sections/BrandsMarquee";
-import { MethodJourney } from "../components/sections/MethodJourney";
-import { ResultsSection } from "../components/sections/ResultsSection";
-import { WorkShowcase } from "../components/sections/WorkShowcase";
-import { CreativeExperience } from "../components/sections/CreativeExperience";
-import { DigitalExperience } from "../components/sections/DigitalExperience";
-import { WhyMVM } from "../components/sections/WhyMVM";
-import { Testimonials } from "../components/sections/Testimonials";
-import { FinalCTA } from "../components/sections/FinalCTA";
-import { EnquiryForm } from "../components/sections/EnquiryForm";
+
+// Below-the-fold sections — lazy-loaded so they don't block the
+// initial bundle / hero paint.
+const ServicesExperience = lazy(() =>
+  import("../components/sections/ServicesExperience").then((m) => ({
+    default: m.ServicesExperience,
+  })),
+);
+const BrandsMarquee = lazy(() =>
+  import("../components/sections/BrandsMarquee").then((m) => ({
+    default: m.BrandsMarquee,
+  })),
+);
+const MethodJourney = lazy(() =>
+  import("../components/sections/MethodJourney").then((m) => ({
+    default: m.MethodJourney,
+  })),
+);
+const ResultsSection = lazy(() =>
+  import("../components/sections/ResultsSection").then((m) => ({
+    default: m.ResultsSection,
+  })),
+);
+const WorkShowcase = lazy(() =>
+  import("../components/sections/WorkShowcase").then((m) => ({
+    default: m.WorkShowcase,
+  })),
+);
+const DigitalExperience = lazy(() =>
+  import("../components/sections/DigitalExperience").then((m) => ({
+    default: m.DigitalExperience,
+  })),
+);
+const WhyMVM = lazy(() =>
+  import("../components/sections/WhyMVM").then((m) => ({
+    default: m.WhyMVM,
+  })),
+);
+const Testimonials = lazy(() =>
+  import("../components/sections/Testimonials").then((m) => ({
+    default: m.Testimonials,
+  })),
+);
+const EnquiryForm = lazy(() =>
+  import("../components/sections/EnquiryForm").then((m) => ({
+    default: m.EnquiryForm,
+  })),
+);
 
 // Section order follows the spec's narrative:
 // Attention -> Strategy -> Creation -> Distribution -> Conversion -> Growth.
@@ -20,18 +57,33 @@ export function Home() {
   return (
     <>
       <HeroExperience />
-      {/* <AttentionSection /> */}
-      <ServicesExperience />
-      <BrandsMarquee />
-      <MethodJourney />
-      <ResultsSection />
-      <WorkShowcase />
-      {/* <CreativeExperience /> */}
-      <DigitalExperience />
-      <WhyMVM />
-      <Testimonials />
-      {/* <FinalCTA /> */}
-      <EnquiryForm />
+      <Suspense fallback={<div className="h-[400px]" />}>
+        <ServicesExperience />
+      </Suspense>
+      <Suspense fallback={<div className="h-[300px]" />}>
+        <BrandsMarquee />
+      </Suspense>
+      <Suspense fallback={<div className="h-[400px]" />}>
+        <MethodJourney />
+      </Suspense>
+      <Suspense fallback={<div className="h-[400px]" />}>
+        <ResultsSection />
+      </Suspense>
+      <Suspense fallback={<div className="h-[400px]" />}>
+        <WorkShowcase />
+      </Suspense>
+      <Suspense fallback={<div className="h-[400px]" />}>
+        <DigitalExperience />
+      </Suspense>
+      <Suspense fallback={<div className="h-[400px]" />}>
+        <WhyMVM />
+      </Suspense>
+      <Suspense fallback={<div className="h-[300px]" />}>
+        <Testimonials />
+      </Suspense>
+      <Suspense fallback={<div className="h-[500px]" />}>
+        <EnquiryForm />
+      </Suspense>
     </>
   );
 }

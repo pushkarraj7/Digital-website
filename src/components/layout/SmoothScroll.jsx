@@ -1,17 +1,17 @@
-import { useEffect, useRef } from 'react';
-import Lenis from 'lenis';
-import { useReducedMotion } from '../../hooks/useReducedMotion';
+import { useEffect, useRef } from "react";
+import Lenis from "lenis";
+import { useReducedMotion } from "../../hooks/useReducedMotion";
 
 /**
  * Wraps the app with Lenis smooth-scroll. Skipped entirely when the user
  * has requested reduced motion, in which case native scroll is used.
  */
-export function SmoothScroll({ children }) {
+export function SmoothScroll({ children, enabled = true }) {
   const lenisRef = useRef(null);
   const reducedMotion = useReducedMotion();
 
   useEffect(() => {
-    if (reducedMotion) return;
+    if (reducedMotion || !enabled) return;
 
     const lenis = new Lenis({
       duration: 1.1,

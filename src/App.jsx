@@ -2,19 +2,27 @@
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 
+import { useReducedMotion } from "./hooks/useReducedMotion";
+import { useIsDesktop } from "./hooks/useMediaQuery";
+
+import { lazy, Suspense } from "react";
 import { SmoothScroll } from "./components/layout/SmoothScroll";
 import { CustomCursor } from "./components/layout/CustomCursor";
 import { Navbar } from "./components/layout/Navbar";
-import { GrowthField } from "./components/three/GrowthField";
 import { Footer } from "./components/layout/Footer";
+
+const GrowthField = lazy(() =>
+  import("./components/three/GrowthField").then((m) => ({
+    default: m.GrowthField,
+  })),
+);
 import { PageTransition } from "./components/layout/PageTransition";
 import { ErrorBoundary } from "./components/layout/ErrorBoundary";
 
 import { Home } from "./pages/Home";
 import { CaseStudy } from "./pages/CaseStudy";
 import { NotFound } from "./pages/NotFound";
-
-import { useReducedMotion } from "./hooks/useReducedMotion";
+import { About } from "./pages/About";
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -46,6 +54,15 @@ function AnimatedRoutes() {
             </PageTransition>
           }
         />
+
+        <Route
+          path="/about"
+          element={
+            <PageTransition>
+              <About />
+            </PageTransition>
+          }
+        />
       </Routes>
     </AnimatePresence>
   );
@@ -53,14 +70,19 @@ function AnimatedRoutes() {
 
 export default function App() {
   const prefersReducedMotion = useReducedMotion();
+  const isDesktop = useIsDesktop();
 
   return (
     <BrowserRouter>
-      <SmoothScroll enabled={!prefersReducedMotion}>
+      <SmoothScroll enabled={isDesktop && !prefersReducedMotion}>
         <div className="relative min-h-screen bg-void text-ink antialiased selection:bg-ion/30 selection:text-ink">
-          {!prefersReducedMotion && <CustomCursor />}
+          {isDesktop && !prefersReducedMotion && <CustomCursor />}
 
-          <GrowthField className="pointer-events-none fixed inset-0 z-0 opacity-90" />
+          {isDesktop && !prefersReducedMotion && (
+            <Suspense fallback={null}>
+              <GrowthField className="pointer-events-none fixed inset-0 z-0 opacity-90" />
+            </Suspense>
+          )}
 
           <Navbar />
 

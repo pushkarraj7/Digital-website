@@ -159,6 +159,16 @@ export function ServicesExperience() {
 
   useEffect(() => {
     if (reducedMotion) return;
+
+    // Mobile shows one card at a time — no need for 60fps 3D math.
+    // Just step the rotation on a slow interval.
+    if (isMobile) {
+      const id = setInterval(() => {
+        if (!pausedRef.current) setRotation((r) => (r + ANGLE_STEP) % 360);
+      }, 2200);
+      return () => clearInterval(id);
+    }
+
     function tick(now) {
       if (!lastRef.current) lastRef.current = now;
       const dt = (now - lastRef.current) / 1000;
@@ -168,7 +178,7 @@ export function ServicesExperience() {
     }
     rafRef.current = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(rafRef.current);
-  }, [reducedMotion]);
+  }, [reducedMotion, isMobile]);
 
   // Index of the card currently front-and-center — used to show a single
   // card at a time on mobile (avoids the 3D fan overflowing small screens).
@@ -219,7 +229,7 @@ export function ServicesExperience() {
 
       {/* ambient glow that follows the frontmost card's category */}
       <div
-        className="pointer-events-none absolute left-1/2 top-[55%] h-[500px] w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-30 blur-[120px] transition-colors duration-700"
+        className="pointer-events-none absolute left-1/2 top-[55%] h-[300px] w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-20 blur-2xl transition-colors duration-700 sm:h-[500px] sm:w-[700px] sm:opacity-30 sm:blur-[120px]"
         style={{ backgroundColor: frontCategory }}
       />
 
@@ -234,21 +244,24 @@ export function ServicesExperience() {
           style={{ transformStyle: "preserve-3d" }}
         >
           {ALL_SERVICES.map((service, i) => {
+            if (isMobile && i !== frontIndex) return null;
+
             const theta = (i * ANGLE_STEP + rotation) % 360;
-            const deltaSigned = ((theta + 180) % 360) - 180; // -180..180, 0 = front
+            const deltaSigned = ((theta + 180) % 360) - 180;
             const rad = (theta * Math.PI) / 180;
 
             const x = radius * Math.sin(rad);
             const z = radius * Math.cos(rad);
-            const focus = (Math.cos(rad) + 1) / 2; // 1 = front, 0 = back
+            const focus = (Math.cos(rad) + 1) / 2;
 
-            const tilt = clamp(deltaSigned, -75, 75) * -0.45; // bounded fan tilt, never flips
+            const tilt = clamp(deltaSigned, -75, 75) * -0.45;
             const opacity = 0.08 + Math.pow(focus, 2.2) * 0.92;
             const scale = 0.58 + Math.pow(focus, 1.6) * 0.5;
             const meta = CATEGORY_META[service.category];
             const isFront = focus > 0.85;
 
-            if (isMobile && i !== frontIndex) return null;
+            const mobileTransform = "translate3d(-50%, -50%, 0) scale(1)";
+            const desktopTransform = `translate3d(-50%, -50%, 0) translate3d(${x}px, 0, ${z}px) rotateY(${tilt}deg) scale(${scale})`;
 
             return (
               <div
@@ -256,7 +269,10 @@ export function ServicesExperience() {
                 className="absolute left-1/2 top-1/2"
                 style={{
                   transformStyle: "preserve-3d",
-                  transform: `translate3d(-50%, -50%, 0) translate3d(${x}px, 0, ${z}px) rotateY(${tilt}deg) scale(${scale})`,
+                  transform: isMobile ? mobileTransform : desktopTransform,
+                  transition: isMobile
+                    ? "transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s ease"
+                    : undefined,
                   zIndex: Math.round(focus * 1000),
                 }}
               >
@@ -266,13 +282,15 @@ export function ServicesExperience() {
                   style={{
                     width: cardWidth,
                     height: cardHeight,
-                    opacity,
+                    opacity: isMobile ? 1 : opacity,
                     pointerEvents: focus > 0.55 ? "auto" : "none",
                     background: `linear-gradient(160deg, rgba(14,16,24,0.96), rgba(8,9,14,0.98))`,
                     backdropFilter: "none",
                     WebkitBackdropFilter: "none",
                     boxShadow: isFront
-                      ? `0 0 70px ${meta.color}40, 0 30px 60px rgba(0,0,0,0.6)`
+                      ? isMobile
+                        ? `0 10px 30px rgba(0,0,0,0.5)`
+                        : `0 0 70px ${meta.color}40, 0 30px 60px rgba(0,0,0,0.6)`
                       : "0 8px 40px rgba(0,0,0,0.5)",
                     borderColor: isFront ? `${meta.color}66` : undefined,
                     transition: "box-shadow 0.4s ease, border-color 0.4s ease",
@@ -320,6 +338,59 @@ export function ServicesExperience() {
           })}
         </div>
       </div>
+
+      {/* Mobile prev/next controls */}
+      {isMobile && (
+        <div className="mt-6 flex items-center justify-center gap-6">
+          <button
+            type="button"
+            aria-label="Previous service"
+            onClick={() => setRotation((r) => (r - ANGLE_STEP + 360) % 360)}
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-line/60 text-ink transition-colors active:bg-white/10"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              className="h-4 w-4"
+            >
+              <path d="M15 18l-6-6 6-6" />
+            </svg>
+          </button>
+
+          <div className="flex items-center gap-1.5">
+            {ALL_SERVICES.map((_, i) => (
+              <span
+                key={i}
+                className="h-1.5 rounded-full transition-all duration-300"
+                style={{
+                  width: i === frontIndex ? 16 : 6,
+                  backgroundColor:
+                    i === frontIndex ? frontCategory : "rgba(255,255,255,0.2)",
+                }}
+              />
+            ))}
+          </div>
+
+          <button
+            type="button"
+            aria-label="Next service"
+            onClick={() => setRotation((r) => (r + ANGLE_STEP) % 360)}
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-line/60 text-ink transition-colors active:bg-white/10"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              className="h-4 w-4"
+            >
+              <path d="M9 6l6 6-6 6" />
+            </svg>
+          </button>
+        </div>
+      )}
 
       {/* filmic grain overlay */}
       {/* <div

@@ -5,7 +5,7 @@ export const BRAND = {
   name: "MVM Digital",
   tagline: "Turn Attention Into Growth.",
   supporting:
-    "MVM Digital builds brands, experiences and digital strategies that turn attention into measurable business growth.",
+    "We build brands, craft experiences, and shape strategies that do more than get noticed — they get results. Every project we take on is built with one goal: turning attention into real, measurable growth.",
 };
 
 export const NAV_LINKS = [

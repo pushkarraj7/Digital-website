@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { NAV_LINKS } from "../../lib/constants";
 import { MagneticButton } from "../ui/MagneticButton";
 import { cn } from "../../lib/utils";
-import logo from "../../assets/mvm.png";
+import logo from "../../assets/mvm.webp";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -19,6 +19,52 @@ export function Navbar() {
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Prevent background page scroll from fighting the mobile menu's
+  // own scroll, and close the menu if the viewport is resized to desktop.
+  useEffect(() => {
+    if (!open) return;
+
+    const scrollY = window.scrollY;
+    const html = document.documentElement;
+    const body = document.body;
+
+    const prev = {
+      htmlOverflow: html.style.overflow,
+      bodyOverflow: body.style.overflow,
+      bodyPosition: body.style.position,
+      bodyTop: body.style.top,
+      bodyWidth: body.style.width,
+    };
+
+    html.style.overflow = "hidden";
+    body.style.overflow = "hidden";
+    // iOS Safari ignores overflow:hidden on body while background content
+    // is still touch-scrollable — pin it in place instead.
+    body.style.position = "fixed";
+    body.style.top = `-${scrollY}px`;
+    body.style.width = "100%";
+
+    return () => {
+      html.style.overflow = prev.htmlOverflow;
+      body.style.overflow = prev.bodyOverflow;
+      body.style.position = prev.bodyPosition;
+      body.style.top = prev.bodyTop;
+      body.style.width = prev.bodyWidth;
+      window.scrollTo(0, scrollY);
+    };
+  }, [open]);
+
+  useEffect(() => {
+    const onResize = () => {
+      if (window.innerWidth >= 1024) {
+        setOpen(false);
+        setMobileExpanded(null);
+      }
+    };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
   }, []);
 
   const openDropdown = (label) => {
@@ -46,9 +92,20 @@ export function Navbar() {
         )}
       >
         <Link to="/" className="flex items-center" data-cursor="interactive">
+          {/* <img
+            src={logo}
+            alt="MVM Digital"
+            className={cn(
+              "w-auto brightness-0 invert transition-all duration-500 ease-premium",
+              scrolled ? "h-8 sm:h-9" : "h-11 sm:h-12",
+            )}
+          /> */}
+
           <img
             src={logo}
             alt="MVM Digital"
+            width={134}
+            height={67}
             className={cn(
               "w-auto brightness-0 invert transition-all duration-500 ease-premium",
               scrolled ? "h-8 sm:h-9" : "h-11 sm:h-12",
@@ -215,13 +272,13 @@ export function Navbar() {
           <div className="flex flex-col gap-1">
             <span
               className={cn(
-                "h-px w-4 bg-ink transition-transform duration-300",
+                "h-px w-4 bg-ink transition-transform duration-300 sm:w-5",
                 open && "translate-y-[3px] rotate-45",
               )}
             />
             <span
               className={cn(
-                "h-px w-4 bg-ink transition-transform duration-300",
+                "h-px w-4 bg-ink transition-transform duration-300 sm:w-5",
                 open && "-translate-y-[3px] -rotate-45",
               )}
             />
@@ -233,7 +290,10 @@ export function Navbar() {
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="absolute left-4 right-4 top-[4.5rem] max-h-[75vh] overflow-y-auto rounded-2xl border border-line bg-void/95 p-6 backdrop-blur-xl lg:hidden sm:left-6 sm:right-6"
+          className="absolute left-4 right-4 top-[4.5rem] max-h-[calc(100svh-6rem)] overflow-y-auto overscroll-contain rounded-2xl border border-line bg-void/95 p-5 backdrop-blur-xl lg:hidden sm:left-6 sm:right-6 sm:p-6"
+          style={{ WebkitOverflowScrolling: "touch", touchAction: "pan-y" }}
+          onWheel={(e) => e.stopPropagation()}
+          onTouchMove={(e) => e.stopPropagation()}
         >
           <ul className="flex flex-col gap-1">
             {NAV_LINKS.map((link) => (
