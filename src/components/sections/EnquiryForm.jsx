@@ -7,6 +7,8 @@ import {
   Mail,
   Phone,
   Clock,
+  MousePointerClick,
+  Navigation,
 } from "lucide-react";
 
 import { EASE } from "../../lib/animations";
@@ -369,7 +371,7 @@ export function EnquiryForm() {
   return (
     <section
       id="contact"
-      className="relative overflow-hidden bg-void px-4 py-20 sm:px-6 sm:py-24"
+      className="relative overflow-hidden bg-void px-4 py-20 sm:px-6 sm:py-32"
     >
       {/* ambient glow, consistent with the rest of the site's dark sections */}
       <div
@@ -381,24 +383,41 @@ export function EnquiryForm() {
       />
 
       <div className="relative mx-auto max-w-6xl">
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.7, ease: EASE }}
-          className="max-w-xl"
-        >
-          <span className="font-mono text-xs uppercase tracking-[0.3em] text-ion">
-            Get in touch
-          </span>
-          <h2 className="mt-4 font-display text-3xl font-semibold text-ink sm:text-5xl">
-            Tell us what you're building.
-          </h2>
-          <p className="mt-4 text-base text-mist sm:text-lg">
-            Fill in a few details and we'll get back to you — no long forms, no
-            sales calls you didn't ask for.
-          </p>
-        </motion.div>
+        <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 0.7, ease: EASE }}
+            className="max-w-xl"
+          >
+            <span className="font-mono text-xs uppercase tracking-[0.3em] text-ion">
+              Get in touch
+            </span>
+            <h2 className="mt-4 font-display text-3xl font-semibold text-ink sm:text-5xl">
+              Tell us what you're building.
+            </h2>
+            <p className="mt-4 text-base text-mist sm:text-lg">
+              Fill in a few details and we'll get back to you — no long forms,
+              no sales calls you didn't ask for.
+            </p>
+          </motion.div>
+
+          <motion.a
+            href="https://www.google.com/maps/search/?api=1&query=708+Capstone+Building+Sharda+Mandir+Crossroads+Old+Gujarat+College+Rd+Ellisbridge+Ahmedabad+Gujarat+380006"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-cursor="interactive"
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 0.7, ease: EASE, delay: 0.1 }}
+            className="flex shrink-0 items-center gap-2 rounded-full border border-line bg-white/[0.03] px-5 py-2.5 text-sm font-medium text-ink transition-colors duration-300 hover:border-ion/50 hover:text-ion"
+          >
+            <Navigation className="h-4 w-4" />
+            Get directions
+          </motion.a>
+        </div>
 
         <div className="mt-12 grid grid-cols-1 gap-8 sm:mt-16 lg:grid-cols-[1fr_1.3fr] lg:gap-12">
           {/* left — company details */}
@@ -444,6 +463,18 @@ export function EnquiryForm() {
                       ) : (
                         <p className="mt-0.5 text-sm text-ink">{value}</p>
                       )}
+                      {label === "Address" && (
+                        <a
+                          href="https://www.google.com/maps/search/?api=1&query=708+Capstone+Building+Sharda+Mandir+Crossroads+Old+Gujarat+College+Rd+Ellisbridge+Ahmedabad+Gujarat+380006"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          data-cursor="interactive"
+                          className="mt-2 inline-flex items-center gap-1 rounded-full border border-line px-2.5 py-1 text-[11px] font-medium text-mist transition-colors duration-300 hover:border-ion/50 hover:text-ion"
+                        >
+                          <Navigation className="h-3 w-3" />
+                          Get directions
+                        </a>
+                      )}
                     </div>
                   </div>
                 ),
@@ -462,7 +493,60 @@ export function EnquiryForm() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 0.7, ease: EASE, delay: 0.15 }}
+            className="relative"
           >
+            {/* points directly at the form, desktop only */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, amount: 0.4 }}
+              transition={{ duration: 0.6, ease: EASE, delay: 0.3 }}
+              className="pointer-events-none absolute -top-12 -left-10 z-10 hidden lg:block"
+            >
+              <div className="flex items-center gap-2 rounded-full border border-ion/30 bg-ion/10 py-1.5 pl-3 pr-4 backdrop-blur-sm">
+                <motion.span
+                  animate={{ y: [0, 3, 0] }}
+                  transition={{
+                    duration: 1.8,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                  className="flex h-6 w-6 items-center justify-center rounded-full bg-ion/20"
+                >
+                  <MousePointerClick className="h-3.5 w-3.5 text-ion" />
+                </motion.span>
+                <span className="text-xs font-medium text-ion">Start here</span>
+              </div>
+              <svg
+                width="40"
+                height="36"
+                viewBox="0 0 40 36"
+                className="absolute left-8 top-full"
+                aria-hidden
+              >
+                <path
+                  d="M4 2C4 18 20 24 34 30"
+                  stroke="#7FB4FF"
+                  strokeWidth="1.5"
+                  strokeDasharray="3 4"
+                  fill="none"
+                  markerEnd="url(#pointerArrow)"
+                />
+                <defs>
+                  <marker
+                    id="pointerArrow"
+                    markerWidth="6"
+                    markerHeight="6"
+                    refX="3"
+                    refY="3"
+                    orient="auto"
+                  >
+                    <path d="M0,0 L6,3 L0,6 Z" fill="#7FB4FF" />
+                  </marker>
+                </defs>
+              </svg>
+            </motion.div>
+
             <Form />
           </motion.div>
         </div>

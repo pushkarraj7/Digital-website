@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { MagneticButton } from "../ui/MagneticButton";
 import { BRAND } from "../../lib/constants";
 import { EASE } from "../../lib/animations";
+import { Sparkles } from "lucide-react";
 
 export function HeroExperience() {
   return (
@@ -25,8 +26,9 @@ export function HeroExperience() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: EASE }}
-            className="rounded-full border border-line/70 bg-white/5 px-4 py-1.5 text-[11px] uppercase tracking-[0.2em] text-mist backdrop-blur-sm sm:text-xs sm:tracking-[0.25em]"
+            className="flex items-center gap-2 rounded-full border border-line/70 bg-white/5 px-4 py-1.5 text-[11px] uppercase tracking-[0.2em] text-mist backdrop-blur-sm sm:text-xs sm:tracking-[0.25em]"
           >
+            <Sparkles className="h-3.5 w-3.5 text-ion" />
             Digital marketing &amp; technology agency
           </motion.span>
 

@@ -11,6 +11,9 @@ import { CustomCursor } from "./components/layout/CustomCursor";
 import { Navbar } from "./components/layout/Navbar";
 import { Footer } from "./components/layout/Footer";
 
+import { Contact } from "./pages/Contact";
+import { Blog } from "./pages/Blog";
+
 const GrowthField = lazy(() =>
   import("./components/three/GrowthField").then((m) => ({
     default: m.GrowthField,
@@ -60,6 +63,23 @@ function AnimatedRoutes() {
           element={
             <PageTransition>
               <About />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/contact"
+          element={
+            <PageTransition>
+              <Contact />
+            </PageTransition>
+          }
+        />
+
+        <Route
+          path="/blog"
+          element={
+            <PageTransition>
+              <Blog />
             </PageTransition>
           }
         />
