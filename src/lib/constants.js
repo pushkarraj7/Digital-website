@@ -86,13 +86,12 @@ export const NAV_LINKS = [
   },
   {
     label: "Portfolio",
-    href: "/portfolio",
     groups: [
       {
         title: "Portfolio",
         items: [
           { label: "Software Portfolio", href: "/portfolio/software" },
-          { label: "Website Portfolio", href: "/portfolio/website" },
+          { label: "Website Portfolio", href: "/portfolio/website-development" },
           {
             label: "Graphic Design Portfolio",
             href: "/portfolio/graphic-design",

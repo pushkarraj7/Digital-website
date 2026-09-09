@@ -11,6 +11,10 @@ export default defineConfig({
   build: {
     minify: "esbuild",
     target: "esnext",
+    modulePreload: {
+      resolveDependencies: (filename, deps) =>
+        deps.filter((dep) => !dep.includes("three-vendor")),
+    },
     rollupOptions: {
       output: {
         manualChunks: {

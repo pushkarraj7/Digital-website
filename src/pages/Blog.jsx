@@ -347,7 +347,7 @@ export function Blog() {
       {/* ---------- Filter + index ---------- */}
       <section className="px-4 py-16 sm:px-6 sm:py-20">
         <div className="mx-auto max-w-6xl">
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap justify-center gap-2 sm:justify-start">
             {CATEGORIES.map((c) => (
               <button
                 key={c}

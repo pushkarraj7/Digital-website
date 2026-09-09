@@ -121,13 +121,12 @@ export function Navbar() {
               onMouseEnter={() => link.groups && openDropdown(link.label)}
               onMouseLeave={() => link.groups && scheduleClose()}
             >
-              <Link
-                to={link.href}
-                data-cursor="interactive"
-                className="flex items-center gap-1 text-sm text-mist transition-colors duration-300 hover:text-ink"
-              >
-                {link.label}
-                {link.groups && (
+              {link.groups ? (
+                <span
+                  data-cursor="interactive"
+                  className="flex cursor-default items-center gap-1 text-sm text-mist transition-colors duration-300 hover:text-ink"
+                >
+                  {link.label}
                   <svg
                     width="10"
                     height="6"
@@ -144,8 +143,16 @@ export function Navbar() {
                       fill="none"
                     />
                   </svg>
-                )}
-              </Link>
+                </span>
+              ) : (
+                <Link
+                  to={link.href}
+                  data-cursor="interactive"
+                  className="flex items-center gap-1 text-sm text-mist transition-colors duration-300 hover:text-ink"
+                >
+                  {link.label}
+                </Link>
+              )}
 
               {link.groups && (
                 <AnimatePresence>
@@ -179,19 +186,12 @@ export function Navbar() {
                           <ul className="flex min-w-[220px] flex-col gap-1 p-3">
                             {link.groups.map((group) => (
                               <li key={group.title}>
-                                <Link
-                                  to={
-                                    group.items[0].href
-                                      .split("/")
-                                      .slice(0, -1)
-                                      .join("/") || group.items[0].href
-                                  }
+                                <div
                                   onMouseEnter={() =>
                                     setHoveredGroup(group.title)
                                   }
-                                  data-cursor="interactive"
                                   className={cn(
-                                    "flex items-center justify-between gap-4 whitespace-nowrap rounded-lg px-3 py-2 text-sm transition-colors duration-200",
+                                    "flex cursor-default items-center justify-between gap-4 whitespace-nowrap rounded-lg px-3 py-2 text-sm transition-colors duration-200",
                                     hoveredGroup === group.title
                                       ? "bg-surface text-ink"
                                       : "text-mist hover:bg-surface hover:text-ink",
@@ -211,7 +211,7 @@ export function Navbar() {
                                       fill="none"
                                     />
                                   </svg>
-                                </Link>
+                                </div>
                               </li>
                             ))}
                           </ul>
@@ -290,7 +290,7 @@ export function Navbar() {
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="absolute left-4 right-4 top-[4.5rem] max-h-[calc(100svh-6rem)] overflow-y-auto overscroll-contain rounded-2xl border border-line bg-void/95 p-5 backdrop-blur-xl lg:hidden sm:left-6 sm:right-6 sm:p-6"
+          className="absolute left-4 right-4 top-full z-[-1] mt-3 max-h-[calc(100svh-8rem)] overflow-y-auto overscroll-contain rounded-2xl border border-line bg-void/95 p-5 backdrop-blur-xl lg:hidden sm:left-6 sm:right-6 sm:p-6"
           style={{ WebkitOverflowScrolling: "touch", touchAction: "pan-y" }}
           onWheel={(e) => e.stopPropagation()}
           onTouchMove={(e) => e.stopPropagation()}
@@ -327,10 +327,13 @@ export function Navbar() {
                       </svg>
                     </button>
                     {mobileExpanded === link.label && (
-                      <div className="flex flex-col gap-3 pb-3 pl-3">
+                      <div className="flex flex-col gap-2.5 pb-3">
                         {link.groups.map((group) => (
-                          <div key={group.title}>
-                            <p className="mb-1 text-xs font-medium uppercase tracking-wide text-haze">
+                          <div
+                            key={group.title}
+                            className="rounded-xl border border-line bg-surface/40 p-3"
+                          >
+                            <p className="mb-2 text-xs font-medium uppercase tracking-wide text-haze">
                               {group.title}
                             </p>
                             <ul className="flex flex-col gap-0.5">
@@ -339,9 +342,25 @@ export function Navbar() {
                                   <Link
                                     to={item.href}
                                     onClick={() => setOpen(false)}
-                                    className="block py-1.5 text-sm text-mist"
+                                    className="group relative flex items-center gap-2 overflow-hidden rounded-lg py-2.5 pl-3 pr-2 text-sm text-mist transition-colors duration-200 active:bg-void/60 active:text-ink"
                                   >
-                                    {item.label}
+                                    <span className="absolute left-0 top-1/2 h-4 w-[2px] -translate-y-1/2 scale-y-0 bg-ion transition-transform duration-200 ease-premium group-active:scale-y-100" />
+                                    <span className="flex-1 pl-1">
+                                      {item.label}
+                                    </span>
+                                    <svg
+                                      width="12"
+                                      height="10"
+                                      viewBox="0 0 12 10"
+                                      className="shrink-0 -translate-x-1 text-ion opacity-0 transition-all duration-200 ease-premium group-active:translate-x-0 group-active:opacity-100"
+                                    >
+                                      <path
+                                        d="M1 5H11M11 5L7 1M11 5L7 9"
+                                        stroke="currentColor"
+                                        strokeWidth="1.5"
+                                        fill="none"
+                                      />
+                                    </svg>
                                   </Link>
                                 </li>
                               ))}

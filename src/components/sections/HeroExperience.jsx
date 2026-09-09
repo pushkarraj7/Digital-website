@@ -3,8 +3,10 @@ import { MagneticButton } from "../ui/MagneticButton";
 import { BRAND } from "../../lib/constants";
 import { EASE } from "../../lib/animations";
 import { Sparkles } from "lucide-react";
+import { useIsDesktop } from "../../hooks/useMediaQuery";
 
 export function HeroExperience() {
+  const isDesktop = useIsDesktop();
   return (
     <section
       id="home"
@@ -37,7 +39,7 @@ export function HeroExperience() {
               className="block"
               initial={{ opacity: 0, y: 26 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, ease: EASE, delay: 0.15 }}
+              transition={{ duration: 0.9, ease: EASE, delay: 0 }}
             >
               Turn Attention
             </motion.span>
@@ -45,7 +47,7 @@ export function HeroExperience() {
               className="block font-medium italic text-ion"
               initial={{ opacity: 0, y: 26 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, ease: EASE, delay: 0.28 }}
+              transition={{ duration: 0.9, ease: EASE, delay: 0.05 }}
             >
               Into Growth.
             </motion.span>
@@ -85,32 +87,37 @@ export function HeroExperience() {
         </div>
 
         {/* Right: browser-window mockup, wide + short */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.96 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, ease: EASE, delay: 0.3 }}
-          className="relative hidden w-full max-w-lg justify-self-center lg:block lg:justify-self-end"
-        >
-          <div className="absolute -inset-3 rounded-[1.5rem] bg-ion/15 blur-2xl" />
-          <div className="relative overflow-hidden rounded-xl border border-line/60 bg-[#0d0f14] shadow-[0_20px_60px_rgba(0,0,0,0.45)]">
-            {/* Browser chrome bar */}
-            {/* <div className="flex items-center gap-1.5 border-b border-line/50 bg-[#081b3d]/60 px-3.5 py-2.5">
+        {isDesktop && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, ease: EASE, delay: 0.3 }}
+            className="relative w-full max-w-lg justify-self-center lg:block lg:justify-self-end"
+          >
+            <div className="absolute -inset-3 rounded-[1.5rem] bg-ion/15 blur-2xl" />
+            <div className="relative overflow-hidden rounded-xl border border-line/60 bg-[#0d0f14] shadow-[0_20px_60px_rgba(0,0,0,0.45)]">
+              {/* Browser chrome bar */}
+              {/* <div className="flex items-center gap-1.5 border-b border-line/50 bg-[#081b3d]/60 px-3.5 py-2.5">
               <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
               <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]" />
               <span className="h-2.5 w-2.5 rounded-full bg-[#28c840]" />
               <div className="ml-3 h-5 flex-1 rounded-md bg-white/5" />
             </div> */}
 
-            {/* Screen content, wide rectangle */}
-            <div className="aspect-[16/10] w-full overflow-hidden">
-              <img
-                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop"
-                alt="Digital marketing dashboard preview"
-                className="h-full w-full object-cover"
-              />
+              {/* Screen content, wide rectangle */}
+              <div className="aspect-[16/10] w-full overflow-hidden">
+                <img
+                  src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop"
+                  alt="Digital marketing dashboard preview"
+                  width={1200}
+                  height={750}
+                  loading="lazy"
+                  className="h-full w-full object-cover"
+                />
+              </div>
             </div>
-          </div>
-        </motion.div>
+          </motion.div>
+        )}
       </div>
 
       <motion.div
