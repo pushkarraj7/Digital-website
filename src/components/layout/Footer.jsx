@@ -1,5 +1,13 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowUp, Facebook, Instagram, Linkedin, Youtube } from "lucide-react";
+import {
+  ArrowUp,
+  ChevronDown,
+  Facebook,
+  Instagram,
+  Linkedin,
+  Youtube,
+} from "lucide-react";
 import { Link } from "react-router-dom";
 import { BRAND, NAV_LINKS } from "../../lib/constants";
 import logo from "../../assets/mvm.webp";
@@ -19,11 +27,36 @@ function XIcon({ className, strokeWidth }) {
 }
 
 const SOCIALS = [
-  { label: "Facebook", href: "#", Icon: Facebook, color: "#1877F2" },
-  { label: "Instagram", href: "#", Icon: Instagram, color: "#E1306C" },
-  { label: "X", href: "#", Icon: XIcon, color: "#000000" },
-  { label: "YouTube", href: "#", Icon: Youtube, color: "#FF0000" },
-  { label: "LinkedIn", href: "#", Icon: Linkedin, color: "#0A66C2" },
+  {
+    label: "Facebook",
+    href: "https://www.facebook.com/madeviamarketing",
+    Icon: Facebook,
+    color: "#1877F2",
+  },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/mvmdigital.official",
+    Icon: Instagram,
+    color: "#E1306C",
+  },
+  {
+    label: "X",
+    href: "https://x.com/MVM_Digitals",
+    Icon: XIcon,
+    color: "#000000",
+  },
+  {
+    label: "YouTube",
+    href: "https://www.youtube.com/@talkwithmvm",
+    Icon: Youtube,
+    color: "#FF0000",
+  },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/company/mvm-digital-pvt-ltd/",
+    Icon: Linkedin,
+    color: "#0A66C2",
+  },
 ];
 
 // Plain nav items (Home, About, Blog, Contact) vs dropdown items
@@ -57,6 +90,9 @@ function FooterLink({ to, children }) {
 
 export function Footer() {
   const year = new Date().getFullYear();
+  // tracks "GroupLabel::SubGroupTitle" of the currently open accordion item
+  // — only one can be open across the whole footer at a time
+  const [openGroup, setOpenGroup] = useState(null);
 
   return (
     <footer className="relative overflow-hidden border-t border-line bg-void px-4 pb-8 pt-14 sm:px-10 sm:pb-10 sm:pt-20">
@@ -92,9 +128,16 @@ export function Footer() {
               className="flex items-center"
               data-cursor="interactive"
             >
+              {/* <img
+                src={logo}
+                alt={BRAND.name}
+                className="h-16 w-auto brightness-0 invert sm:h-20"
+              /> */}
               <img
                 src={logo}
                 alt={BRAND.name}
+                width={134}
+                height={67}
                 className="h-16 w-auto brightness-0 invert sm:h-20"
               />
             </Link>
@@ -144,28 +187,74 @@ export function Footer() {
               }}
             >
               <FooterColumn heading={group.label}>
-                <div className="flex flex-col gap-3">
-                  {group.groups.length === 1
-                    ? // Single group (Portfolio) — list its items directly.
-                      group.groups[0].items.map((item) => (
-                        <FooterLink key={item.href} to={item.href}>
-                          {item.label}
-                        </FooterLink>
-                      ))
-                    : // Multiple groups (Services) — list category names,
-                      // linking to the category's first item.
-                      group.groups.map((g) => (
-                        <FooterLink
-                          key={g.title}
-                          to={
-                            g.items[0].href.split("/").slice(0, -1).join("/") ||
-                            g.items[0].href
-                          }
-                        >
-                          {g.title}
-                        </FooterLink>
-                      ))}
-                </div>
+                {group.groups.length > 1 ? (
+                  // Multiple sub-groups (Services) — accordion, 1 open at a time
+                  <div className="flex flex-col gap-1">
+                    {group.groups.map((g) => {
+                      const key = `${group.label}::${g.title}`;
+                      const isOpen = openGroup === key;
+
+                      return (
+                        <div key={g.title} className="py-2">
+                          <button
+                            type="button"
+                            data-cursor="interactive"
+                            onClick={() => setOpenGroup(isOpen ? null : key)}
+                            aria-expanded={isOpen}
+                            className="flex w-full items-center justify-between gap-2 text-left text-xs font-medium uppercase tracking-wide text-mist/70 transition-colors duration-300 hover:text-ion"
+                          >
+                            {g.title}
+                            <ChevronDown
+                              className={`h-3.5 w-3.5 shrink-0 transition-transform duration-300 ${
+                                isOpen ? "rotate-180 text-ion" : ""
+                              }`}
+                              strokeWidth={2}
+                            />
+                          </button>
+
+                          <motion.div
+                            initial={false}
+                            animate={{
+                              gridTemplateRows: isOpen ? "1fr" : "0fr",
+                            }}
+                            transition={{
+                              duration: 0.35,
+                              ease: [0.16, 1, 0.3, 1],
+                            }}
+                            style={{ display: "grid" }}
+                            className="overflow-hidden"
+                          >
+                            <div className="min-h-0 overflow-hidden">
+                              <motion.div
+                                animate={{ opacity: isOpen ? 1 : 0 }}
+                                transition={{
+                                  duration: 0.25,
+                                  delay: isOpen ? 0.08 : 0,
+                                }}
+                                className="flex flex-col gap-3 pt-3"
+                              >
+                                {g.items.map((item) => (
+                                  <FooterLink key={item.href} to={item.href}>
+                                    {item.label}
+                                  </FooterLink>
+                                ))}
+                              </motion.div>
+                            </div>
+                          </motion.div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  // Single group (Portfolio) — flat list, no accordion needed
+                  <div className="flex flex-col gap-3">
+                    {group.groups[0].items.map((item) => (
+                      <FooterLink key={item.href} to={item.href}>
+                        {item.label}
+                      </FooterLink>
+                    ))}
+                  </div>
+                )}
               </FooterColumn>
             </motion.div>
           ))}

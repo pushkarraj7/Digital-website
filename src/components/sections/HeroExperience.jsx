@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef, useEffect } from "react";
 import { MagneticButton } from "../ui/MagneticButton";
 import { BRAND } from "../../lib/constants";
 import { EASE } from "../../lib/animations";
@@ -7,21 +8,51 @@ import { useIsDesktop } from "../../hooks/useMediaQuery";
 
 export function HeroExperience() {
   const isDesktop = useIsDesktop();
+  const sectionRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+
+  // Depth layers: background moves slowest, content moves faster —
+  // classic parallax. Adjust the output ranges to taste.
+  const glowY = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
+  const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+
+  // Plain ref (not a motion value) so the R3F render loop can read it
+  // every frame without triggering React re-renders.
+  const scrollRef = useRef(0);
+  useEffect(() => {
+    return scrollYProgress.on("change", (v) => {
+      scrollRef.current = v;
+    });
+  }, [scrollYProgress]);
   return (
     <section
+      ref={sectionRef}
       id="home"
       className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden px-4 pt-28 pb-16 sm:px-6 sm:pt-32 lg:pt-24"
     >
-      {/* Ambient glow only, no image */}
-      <div
+      {/* Layer 1: background glow — moves slowest (deepest) */}
+      <motion.div
+        style={{ y: glowY }}
         className="pointer-events-none absolute inset-0"
-        style={{
-          background:
-            "radial-gradient(55% 45% at 50% 40%, rgba(78,134,255,0.16), transparent 70%)",
-        }}
-      />
+      >
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(55% 45% at 50% 40%, rgba(78,134,255,0.16), transparent 70%)",
+          }}
+        />
+      </motion.div>
 
-      <div className="relative z-10 mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16">
+      {/* Layer 2: content — moves faster (foreground), fades on scroll-out */}
+      <motion.div
+        style={{ y: contentY, opacity: contentOpacity }}
+        className="relative z-10 mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16"
+      >
         {/* Left: text content */}
         <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
           <motion.span
@@ -111,14 +142,15 @@ export function HeroExperience() {
                   alt="Digital marketing dashboard preview"
                   width={1200}
                   height={750}
-                  loading="lazy"
+                  loading="eager"
+                  fetchpriority="high"
                   className="h-full w-full object-cover"
                 />
               </div>
             </div>
           </motion.div>
         )}
-      </div>
+      </motion.div>
 
       <motion.div
         initial={{ opacity: 0, y: -4 }}

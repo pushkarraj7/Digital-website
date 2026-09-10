@@ -1,5 +1,6 @@
-import { lazy, Suspense } from "react";
+import { lazy } from "react";
 import { HeroExperience } from "../components/sections/HeroExperience";
+import { LazySection } from "../components/layout/LazySection";
 
 // Below-the-fold sections — lazy-loaded so they don't block the
 // initial bundle / hero paint.
@@ -57,33 +58,33 @@ export function Home() {
   return (
     <>
       <HeroExperience />
-      <Suspense fallback={<div className="h-[400px]" />}>
+      <LazySection fallback={<div className="h-[400px]" />}>
         <ServicesExperience />
-      </Suspense>
-      <Suspense fallback={<div className="h-[300px]" />}>
+      </LazySection>
+      <LazySection fallback={<div className="h-[300px]" />}>
         <BrandsMarquee />
-      </Suspense>
-      <Suspense fallback={<div className="h-[400px]" />}>
+      </LazySection>
+      <LazySection fallback={<div className="h-[400px]" />}>
         <MethodJourney />
-      </Suspense>
-      <Suspense fallback={<div className="h-[400px]" />}>
+      </LazySection>
+      <LazySection fallback={<div className="h-[400px]" />}>
         <ResultsSection />
-      </Suspense>
-      <Suspense fallback={<div className="h-[400px]" />}>
+      </LazySection>
+      <LazySection fallback={<div className="h-[400px]" />}>
         <WorkShowcase />
-      </Suspense>
-      <Suspense fallback={<div className="h-[400px]" />}>
+      </LazySection>
+      <LazySection fallback={<div className="h-[400px]" />}>
         <DigitalExperience />
-      </Suspense>
-      <Suspense fallback={<div className="h-[400px]" />}>
+      </LazySection>
+      <LazySection fallback={<div className="h-[400px]" />}>
         <WhyMVM />
-      </Suspense>
-      <Suspense fallback={<div className="h-[300px]" />}>
+      </LazySection>
+      <LazySection fallback={<div className="h-[300px]" />}>
         <Testimonials />
-      </Suspense>
-      <Suspense fallback={<div className="h-[500px]" />}>
+      </LazySection>
+      <LazySection fallback={<div className="h-[500px]" />}>
         <EnquiryForm />
-      </Suspense>
+      </LazySection>
     </>
   );
 }

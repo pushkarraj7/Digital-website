@@ -13,6 +13,7 @@ export function ParticleField({
   count = 1400,
   colors = ["#4E86FF"],
   activeZone,
+  scrollRef,
 }) {
   const pointsRef = useRef();
   const materialRef = useRef();
@@ -46,6 +47,11 @@ export function ParticleField({
     if (!pointsRef.current) return;
     const t = state.clock.getElapsedTime();
     const mouse = mouseRef?.current;
+    // Field expands and drifts back as user scrolls down the page —
+    // gives the 3D layer its own parallax depth, not just the DOM.
+    const scroll = scrollRef?.current ?? 0;
+    const spread = 1 + scroll * 0.6;
+    pointsRef.current.position.z = -scroll * 1.5;
     if (mouse) {
       mouse.x += (mouse.targetX - mouse.x) * 0.04;
       mouse.y += (mouse.targetY - mouse.y) * 0.04;
@@ -76,8 +82,8 @@ export function ParticleField({
       const dist = Math.sqrt(dx * dx + dy * dy) + 0.001;
       const pull = Math.min(1.1 / dist, 0.9);
 
-      array[i3] = bx + dx * pull * 0.35 + drift * 0.4;
-      array[i3 + 1] = by + dy * pull * 0.35 + drift + wave;
+      array[i3] = (bx + dx * pull * 0.35 + drift * 0.4) * spread;
+      array[i3 + 1] = (by + dy * pull * 0.35 + drift + wave) * spread;
       array[i3 + 2] = bz + Math.sin(t * 0.3 + seed) * 0.15;
     }
     pointsRef.current.geometry.attributes.position.needsUpdate = true;

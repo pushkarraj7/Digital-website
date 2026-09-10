@@ -6,11 +6,15 @@ import { visualizer } from "rollup-plugin-visualizer";
 export default defineConfig({
   plugins: [
     react(),
-    visualizer({ open: true, gzipSize: true, brotliSize: true }),
-  ],
+    process.env.ANALYZE &&
+      visualizer({ open: true, gzipSize: true, brotliSize: true }),
+  ].filter(Boolean),
   build: {
     minify: "esbuild",
     target: "esnext",
+    esbuild: {
+      drop: ["console", "debugger"],
+    },
     modulePreload: {
       resolveDependencies: (filename, deps) =>
         deps.filter((dep) => !dep.includes("three-vendor")),
@@ -20,6 +24,7 @@ export default defineConfig({
         manualChunks: {
           "three-vendor": ["three", "@react-three/fiber", "@react-three/drei"],
           "react-vendor": ["react", "react-dom"],
+          "framer-vendor": ["framer-motion"],
         },
       },
     },
