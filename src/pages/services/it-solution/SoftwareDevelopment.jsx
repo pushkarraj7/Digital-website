@@ -313,10 +313,10 @@ export function SoftwareDevelopment() {
               </span>
             </span>
             <h2 className="mt-5 font-display text-3xl font-semibold text-ink sm:text-4xl">
-              Pick what you need built,
+              Web, mobile, ERP, CRM, cloud —
             </h2>
             <h2 className="font-display text-3xl font-semibold text-ion sm:text-4xl">
-              see how we approach it.
+              pick the piece you're stuck on.
             </h2>
           </motion.div>
 
@@ -455,10 +455,10 @@ export function SoftwareDevelopment() {
               What's included
             </p>
             <h2 className="mt-4 font-display text-3xl font-semibold text-ink sm:text-4xl">
-              Everything a build needs,
+              Architecture, code, infra, security —
             </h2>
             <h2 className="font-display text-3xl font-semibold text-ion sm:text-4xl">
-              handled by one engineering team.
+              none of it an afterthought.
             </h2>
           </motion.div>
 
@@ -573,9 +573,9 @@ export function SoftwareDevelopment() {
                 </h3>
                 <ul className="mt-5 flex flex-col gap-4">
                   {[
-                    "One team across product, engineering and infrastructure — no handoffs between vendors.",
+                    "The people who architected it are still around when something needs to change six months later.",
                     "Architecture decisions made for your scale, not a one-size template.",
-                    "Support that continues after launch, not just a handover document.",
+                    "Bug reports and feature requests go to people who already know the codebase.",
                   ].map((point) => (
                     <li
                       key={point}

@@ -45,7 +45,7 @@ const SERVICE_CATEGORIES = [
     id: "custom-design",
     label: "Custom Design",
     icon: Palette,
-    tagline: "A card that looks and feels like your brand.",
+    tagline: "A card that could only be yours.",
     description:
       "Material, finish and layout chosen to match your brand — not a template with your logo dropped in.",
     features: [
@@ -59,7 +59,7 @@ const SERVICE_CATEGORIES = [
     id: "tap-share",
     label: "Tap & Share",
     icon: Nfc,
-    tagline: "No app, no typing — just a tap.",
+    tagline: "Hold it near a phone. That's the whole process.",
     description:
       "An embedded NFC chip shares your profile the moment your card touches a phone, with a QR code as a fallback for older devices.",
     features: [
@@ -220,8 +220,7 @@ export function CustomNfcCard() {
             transition={{ duration: 0.9, ease: EASE, delay: 0.1 }}
             className="mt-6 font-display text-display-1 font-semibold text-ink sm:mt-8"
           >
-            Custom NFC{" "}
-            <span className="italic text-ion">Business Cards</span>
+            Custom NFC <span className="italic text-ion">Business Cards</span>
           </motion.h1>
 
           <motion.p
@@ -231,9 +230,9 @@ export function CustomNfcCard() {
             transition={{ duration: 0.9, ease: EASE, delay: 0.25 }}
             className="mx-auto mt-6 max-w-2xl text-base text-mist sm:text-lg"
           >
-            A card designed around your brand, with a digital profile behind
-            it — tap it against any phone and your contact info, links and
-            socials are there instantly.
+            A card built around your brand, backed by a digital profile — tap it
+            on any phone and your number, links and socials show up, no app
+            required.
           </motion.p>
 
           <motion.div
@@ -284,10 +283,10 @@ export function CustomNfcCard() {
               </span>
             </span>
             <h2 className="mt-5 font-display text-3xl font-semibold text-ink sm:text-4xl">
-              Pick what matters most,
+              One card, four jobs —
             </h2>
             <h2 className="font-display text-3xl font-semibold text-ion sm:text-4xl">
-              see how the card handles it.
+              pick one and watch it work.
             </h2>
           </motion.div>
 

@@ -31,7 +31,8 @@ const SERVICE_CATEGORIES = [
     id: "audience-research",
     label: "Audience Research",
     icon: Users2,
-    tagline: "Know exactly who you're trying to reach before you spend a rupee.",
+    tagline:
+      "Know exactly who you're trying to reach before you spend a rupee.",
     description:
       "We build out your ideal customer profile — who they are, what they search, where they spend time — so every campaign after this is aimed at the right people.",
     features: [
@@ -130,7 +131,13 @@ const DELIVERABLES = [
   },
 ];
 
-const HIGHLIGHTS = ["Email", "LinkedIn Ads", "Meta Ads", "Google Ads", "Landing Pages"];
+const HIGHLIGHTS = [
+  "Email",
+  "LinkedIn Ads",
+  "Meta Ads",
+  "Google Ads",
+  "Landing Pages",
+];
 
 const PROCESS = [
   {
@@ -213,8 +220,7 @@ export function LeadGenerationProgram() {
             transition={{ duration: 0.9, ease: EASE, delay: 0.1 }}
             className="mt-6 font-display text-display-1 font-semibold text-ink sm:mt-8"
           >
-            Lead Generation{" "}
-            <span className="italic text-ion">Program</span>
+            Lead Generation <span className="italic text-ion">Program</span>
           </motion.h1>
 
           <motion.p
@@ -276,10 +282,10 @@ export function LeadGenerationProgram() {
               </span>
             </span>
             <h2 className="mt-5 font-display text-3xl font-semibold text-ink sm:text-4xl">
-              Pick a stage,
+              Research, email, social, ads —
             </h2>
             <h2 className="font-display text-3xl font-semibold text-ion sm:text-4xl">
-              see how we run it.
+              a lead moves through all four.
             </h2>
           </motion.div>
 
@@ -418,10 +424,10 @@ export function LeadGenerationProgram() {
               What's included
             </p>
             <h2 className="mt-4 font-display text-3xl font-semibold text-ink sm:text-4xl">
-              Everything your pipeline needs,
+              Research, funnels and campaigns,
             </h2>
             <h2 className="font-display text-3xl font-semibold text-ion sm:text-4xl">
-              run by one accountable team.
+              built to hand sales a lead worth calling.
             </h2>
           </motion.div>
 
@@ -435,7 +441,11 @@ export function LeadGenerationProgram() {
             {DELIVERABLES.map((item) => {
               const Icon = item.icon;
               return (
-                <motion.div key={item.title} variants={fadeUp} className="group">
+                <motion.div
+                  key={item.title}
+                  variants={fadeUp}
+                  className="group"
+                >
                   <GlassPanel className="relative h-full overflow-hidden p-6 transition-all duration-500 group-hover:-translate-y-1">
                     <div
                       className="pointer-events-none absolute -right-14 -top-14 h-28 w-28 rounded-full opacity-0 blur-3xl transition-all duration-700 group-hover:scale-150 group-hover:opacity-100"
@@ -532,7 +542,7 @@ export function LeadGenerationProgram() {
                 </h3>
                 <ul className="mt-5 flex flex-col gap-4">
                   {[
-                    "One team handling research, funnels and campaigns — no gaps between them.",
+                    "The same team builds the funnel and runs the campaigns, so nothing gets lost in a handoff.",
                     "Leads scored and qualified before they ever reach your sales team.",
                     "Reporting tied to cost-per-lead, not just clicks or impressions.",
                   ].map((point) => (

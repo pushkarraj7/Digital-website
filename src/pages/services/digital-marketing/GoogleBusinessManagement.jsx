@@ -61,7 +61,7 @@ const SERVICE_CATEGORIES = [
     icon: Star,
     tagline: "Turn reviews into your best sales pitch.",
     description:
-      "We monitor and respond to reviews, encourage happy customers to leave feedback, and handle negative reviews before they cost you a customer.",
+      "We keep an eye on new reviews, prompt happy customers to leave one, and step in fast on a bad review before it sits there unanswered.",
     features: [
       "Review monitoring & response",
       "Review generation campaigns",
@@ -125,7 +125,7 @@ const DELIVERABLES = [
     icon: HelpCircle,
     title: "Q&A & Customer Engagement",
     description:
-      "Questions on your profile answered promptly, before an unanswered one costs you a customer.",
+      "Questions on your profile get answered fast — most buyers move on if nobody replies within a day.",
     color: "#f472b6",
   },
 ];
@@ -281,10 +281,10 @@ export function GoogleBusinessManagement() {
               </span>
             </span>
             <h2 className="mt-5 font-display text-3xl font-semibold text-ink sm:text-4xl">
-              Pick a stage,
+              Setup, ranking, reviews, posts —
             </h2>
             <h2 className="font-display text-3xl font-semibold text-ion sm:text-4xl">
-              see how we run it.
+              a profile has four things to get right.
             </h2>
           </motion.div>
 

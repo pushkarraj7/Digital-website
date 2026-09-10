@@ -303,9 +303,9 @@ export function SocialMediaMarketing() {
             transition={{ duration: 0.9, ease: EASE, delay: 0.25 }}
             className="mx-auto mt-6 max-w-2xl text-base text-mist sm:text-lg"
           >
-            We plan, create and run your social presence end to end — content,
-            community and paid — so it builds an audience instead of just
-            posting into the void.
+            From SEO and paid search to the content calendar and community
+            replies, we run the whole marketing mix — not just the social feed
+            everyone notices.
           </motion.p>
 
           <motion.div
@@ -356,10 +356,10 @@ export function SocialMediaMarketing() {
               </span>
             </span>
             <h2 className="mt-5 font-display text-3xl font-semibold text-ink sm:text-4xl">
-              Pick a channel,
+              SEO, SMM, SEM, PPC —
             </h2>
             <h2 className="font-display text-3xl font-semibold text-ion sm:text-4xl">
-              see how we run it.
+              nine channels, none of them run the same way.
             </h2>
           </motion.div>
 
@@ -498,10 +498,10 @@ export function SocialMediaMarketing() {
               What's included
             </p>
             <h2 className="mt-4 font-display text-3xl font-semibold text-ink sm:text-4xl">
-              Everything your social presence needs,
+              Strategy, content and community,
             </h2>
             <h2 className="font-display text-3xl font-semibold text-ion sm:text-4xl">
-              run by one accountable team.
+              managed as one job, not three.
             </h2>
           </motion.div>
 
@@ -616,7 +616,7 @@ export function SocialMediaMarketing() {
                 </h3>
                 <ul className="mt-5 flex flex-col gap-4">
                   {[
-                    "One team handling strategy, content and paid — no handoffs between agencies.",
+                    "The person planning your content is the same one reading the comments — nothing gets lost in translation.",
                     "Content calendars planned monthly, not scrambled together week to week.",
                     "Reporting that shows what moved the numbers, not just vanity metrics.",
                   ].map((point) => (

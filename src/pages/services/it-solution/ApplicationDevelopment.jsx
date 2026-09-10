@@ -147,15 +147,13 @@ const DELIVERABLES = [
   {
     icon: Rocket,
     title: "Store Deployment",
-    description:
-      "Store listings, submission and approval handled end to end.",
+    description: "Store listings, submission and approval handled end to end.",
     color: "#22d3ee",
   },
   {
     icon: RefreshCcw,
     title: "Post-Launch Support",
-    description:
-      "Updates, fixes and new features rolled out as the app grows.",
+    description: "Updates, fixes and new features rolled out as the app grows.",
     color: "#f472b6",
   },
 ];
@@ -179,7 +177,8 @@ const PROCESS = [
   {
     index: "02",
     title: "Design",
-    description: "Wireframes and prototypes reviewed before development starts.",
+    description:
+      "Wireframes and prototypes reviewed before development starts.",
   },
   {
     index: "03",
@@ -311,10 +310,10 @@ export function ApplicationDevelopment() {
               </span>
             </span>
             <h2 className="mt-5 font-display text-3xl font-semibold text-ink sm:text-4xl">
-              Pick the app you need,
+              Mobile, web, cross-platform, enterprise —
             </h2>
             <h2 className="font-display text-3xl font-semibold text-ion sm:text-4xl">
-              see how we build it.
+              the right build depends on who's using it.
             </h2>
           </motion.div>
 

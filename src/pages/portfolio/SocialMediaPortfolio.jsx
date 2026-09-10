@@ -185,8 +185,8 @@ export function SocialMediaPortfolio() {
             transition={{ duration: 0.7, ease: EASE, delay: 0.1 }}
             className="mt-5 font-display text-3xl font-semibold text-ink md:text-5xl"
           >
-            Have a product idea{" "}
-            <span className="italic text-ion">in mind?</span>
+            Ready for a feed{" "}
+            <span className="italic text-ion">people stop for?</span>
           </motion.h2>
 
           <motion.p
@@ -196,8 +196,8 @@ export function SocialMediaPortfolio() {
             transition={{ duration: 0.6, ease: EASE, delay: 0.2 }}
             className="mx-auto mt-5 max-w-xl text-mist"
           >
-            Let's talk about building your next CRM, ERP, HRMS, or internal tool
-            — starting with what's actually breaking right now.
+            Let's talk about your next content calendar, reel series, or
+            platform — starting with what's not getting watched right now.
           </motion.p>
 
           <motion.div

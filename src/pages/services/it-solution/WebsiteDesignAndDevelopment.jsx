@@ -228,8 +228,8 @@ export function WebsiteDesignAndDevelopment() {
             transition={{ duration: 0.9, ease: EASE, delay: 0.25 }}
             className="mx-auto mt-6 max-w-2xl text-base text-mist sm:text-lg"
           >
-            We design and build websites that look right, work on every
-            device, and are set up to rank and convert from day one.
+            We design and build websites that look right, work on every device,
+            and are set up to rank and convert from day one.
           </motion.p>
 
           <motion.div
@@ -280,10 +280,10 @@ export function WebsiteDesignAndDevelopment() {
               </span>
             </span>
             <h2 className="mt-5 font-display text-3xl font-semibold text-ink sm:text-4xl">
-              Pick what the site needs,
+              Design, responsiveness, checkout, SEO —
             </h2>
             <h2 className="font-display text-3xl font-semibold text-ion sm:text-4xl">
-              see how we handle it.
+              a site lives or dies on all four.
             </h2>
           </motion.div>
 
@@ -422,10 +422,10 @@ export function WebsiteDesignAndDevelopment() {
               What's included
             </p>
             <h2 className="mt-4 font-display text-3xl font-semibold text-ink sm:text-4xl">
-              Everything a site needs,
+              Design and SEO,
             </h2>
             <h2 className="font-display text-3xl font-semibold text-ion sm:text-4xl">
-              from first sketch to search results.
+              planned together instead of bolted on later.
             </h2>
           </motion.div>
 
@@ -540,7 +540,7 @@ export function WebsiteDesignAndDevelopment() {
                 </h3>
                 <ul className="mt-5 flex flex-col gap-4">
                   {[
-                    "Design, development and SEO handled by one team — no gaps between handoffs.",
+                    "The designer and the developer talk to each other daily, not through a project brief.",
                     "Built responsive from the first wireframe, not patched in afterward.",
                     "SEO foundations laid at build time, not bolted on after launch.",
                   ].map((point) => (

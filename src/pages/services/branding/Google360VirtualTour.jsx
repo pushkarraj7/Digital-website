@@ -38,7 +38,7 @@ const SERVICE_CATEGORIES = [
     features: [
       "Full-premises 360° capture",
       "Google-certified tour format",
-      "Seamless room-to-room navigation",
+      "Click through from room to room, no reloading",
       "Published directly to your Business Profile",
     ],
   },
@@ -109,7 +109,7 @@ const SERVICE_CATEGORIES = [
       "Google Business Profile audit & setup",
       "Category, hours & attribute optimization",
       "Review & rating strategy",
-      "Local search visibility improvements",
+      "Fixes for the details that hurt your ranking",
     ],
   },
 ];
@@ -140,7 +140,7 @@ const DELIVERABLES = [
     icon: MapPin,
     title: "Street View Publishing",
     description:
-      "Certified placement inside Google Street View and Maps, right where local searches happen.",
+      "Your business placed inside Street View and Maps — no plugin, no separate app to open.",
     color: "#4E86FF",
   },
   {
@@ -313,10 +313,10 @@ export function Google360VirtualTour() {
               </span>
             </span>
             <h2 className="mt-5 font-display text-3xl font-semibold text-ink sm:text-4xl">
-              Pick a piece,
+              Six parts, one tour —
             </h2>
             <h2 className="font-display text-3xl font-semibold text-ion sm:text-4xl">
-              see how we build it.
+              pick one to see how it's built.
             </h2>
           </motion.div>
 

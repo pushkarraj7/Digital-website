@@ -37,7 +37,7 @@ const SERVICE_CATEGORIES = [
       "Full 360° interior capture stitched into a single walkthrough — every hallway, corner and room connected the way a real visit would feel.",
     features: [
       "360° room-by-room capture",
-      "Seamless room-to-room navigation",
+      "Move room to room with a click, no reloading",
       "HDR-balanced lighting on every shot",
       "Dollhouse & walkthrough view modes",
     ],
@@ -48,12 +48,12 @@ const SERVICE_CATEGORIES = [
     icon: Building2,
     tagline: "First impressions, covered from the curb to the backyard.",
     description:
-      "The outside of a property sells as hard as the inside. We capture the facade, entry, yard and surrounding grounds in the same immersive format.",
+      "The outside of a property sells as hard as the inside. We capture the facade, entry, yard and grounds so the tour doesn't stop at the front door.",
     features: [
       "Full facade & entry capture",
       "Yard, garden & outdoor space coverage",
       "Neighborhood context shots",
-      "Seamless link into the interior tour",
+      "Connects straight into the interior walkthrough",
     ],
   },
   {
@@ -147,7 +147,7 @@ const DELIVERABLES = [
     icon: Glasses,
     title: "VR-Ready Walkthroughs",
     description:
-      "The same tour exported headset-ready, for buyers who want the closest thing to walking through in person.",
+      "The same tour exported for headsets, so out-of-town buyers get more than a scroll through photos.",
     color: "#22d3ee",
   },
   {
@@ -260,9 +260,9 @@ export function Property360VirtualTour() {
             transition={{ duration: 0.9, ease: EASE, delay: 0.25 }}
             className="mx-auto mt-6 max-w-2xl text-base text-mist sm:text-lg"
           >
-            We capture, stage and stitch every property into an immersive
-            walkthrough — interior, exterior, drone and floor plan, all in
-            one tour buyers can explore before they ever step inside.
+            We capture, stage and stitch every property into one connected
+            walkthrough — interior, exterior, drone and floor plan, all in a
+            tour buyers can explore before they ever step inside.
           </motion.p>
 
           <motion.div
@@ -313,10 +313,10 @@ export function Property360VirtualTour() {
               </span>
             </span>
             <h2 className="mt-5 font-display text-3xl font-semibold text-ink sm:text-4xl">
-              Pick a view,
+              Interior, exterior, drone or VR —
             </h2>
             <h2 className="font-display text-3xl font-semibold text-ion sm:text-4xl">
-              see how we build it.
+              each one covers something the others can't.
             </h2>
           </motion.div>
 

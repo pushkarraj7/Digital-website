@@ -130,7 +130,13 @@ const DELIVERABLES = [
   },
 ];
 
-const HIGHLIGHTS = ["Google Ads", "Meta Ads", "LinkedIn Ads", "YouTube Ads", "Display Network"];
+const HIGHLIGHTS = [
+  "Google Ads",
+  "Meta Ads",
+  "LinkedIn Ads",
+  "YouTube Ads",
+  "Display Network",
+];
 
 const PROCESS = [
   {
@@ -213,8 +219,7 @@ export function OnlineAdvertiseCampaign() {
             transition={{ duration: 0.9, ease: EASE, delay: 0.1 }}
             className="mt-6 font-display text-display-1 font-semibold text-ink sm:mt-8"
           >
-            Online Advertise{" "}
-            <span className="italic text-ion">Campaign</span>
+            Online Advertise <span className="italic text-ion">Campaign</span>
           </motion.h1>
 
           <motion.p
@@ -277,10 +282,10 @@ export function OnlineAdvertiseCampaign() {
               </span>
             </span>
             <h2 className="mt-5 font-display text-3xl font-semibold text-ink sm:text-4xl">
-              Pick a format,
+              Search, social, display, video —
             </h2>
             <h2 className="font-display text-3xl font-semibold text-ion sm:text-4xl">
-              see how we run it.
+              each one catches a buyer at a different moment.
             </h2>
           </motion.div>
 
@@ -419,10 +424,10 @@ export function OnlineAdvertiseCampaign() {
               What's included
             </p>
             <h2 className="mt-4 font-display text-3xl font-semibold text-ink sm:text-4xl">
-              Everything your campaigns need,
+              Strategy, creative and media buying,
             </h2>
             <h2 className="font-display text-3xl font-semibold text-ion sm:text-4xl">
-              run by one accountable team.
+              handled without three separate invoices.
             </h2>
           </motion.div>
 
@@ -436,7 +441,11 @@ export function OnlineAdvertiseCampaign() {
             {DELIVERABLES.map((item) => {
               const Icon = item.icon;
               return (
-                <motion.div key={item.title} variants={fadeUp} className="group">
+                <motion.div
+                  key={item.title}
+                  variants={fadeUp}
+                  className="group"
+                >
                   <GlassPanel className="relative h-full overflow-hidden p-6 transition-all duration-500 group-hover:-translate-y-1">
                     <div
                       className="pointer-events-none absolute -right-14 -top-14 h-28 w-28 rounded-full opacity-0 blur-3xl transition-all duration-700 group-hover:scale-150 group-hover:opacity-100"
@@ -533,7 +542,7 @@ export function OnlineAdvertiseCampaign() {
                 </h3>
                 <ul className="mt-5 flex flex-col gap-4">
                   {[
-                    "One team handling strategy, creative and media buying — no handoffs between agencies.",
+                    "Strategy, creative and media buying sit with the same people, so nobody's waiting on someone else's approval to move.",
                     "Every campaign built around cost per result, not vanity metrics.",
                     "Budget shifted toward what's working, reviewed weekly not quarterly.",
                   ].map((point) => (

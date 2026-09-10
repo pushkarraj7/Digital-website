@@ -183,8 +183,8 @@ export function GraphicDesignPortfolio() {
             transition={{ duration: 0.7, ease: EASE, delay: 0.1 }}
             className="mt-5 font-display text-3xl font-semibold text-ink md:text-5xl"
           >
-            Have a product idea{" "}
-            <span className="italic text-ion">in mind?</span>
+            Have a brand that needs{" "}
+            <span className="italic text-ion">a real look?</span>
           </motion.h2>
 
           <motion.p
@@ -194,8 +194,8 @@ export function GraphicDesignPortfolio() {
             transition={{ duration: 0.6, ease: EASE, delay: 0.2 }}
             className="mx-auto mt-5 max-w-xl text-mist"
           >
-            Let's talk about building your next CRM, ERP, HRMS, or internal tool
-            — starting with what's actually breaking right now.
+            Let's talk about your next logo, packaging, campaign, or full brand
+            refresh — starting with what's not landing right now.
           </motion.p>
 
           <motion.div

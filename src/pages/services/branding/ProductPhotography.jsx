@@ -45,7 +45,7 @@ const SERVICE_CATEGORIES = [
     icon: UtensilsCrossed,
     tagline: "Food that looks like it just left the kitchen.",
     description:
-      "Styling and lighting built for texture and appetite appeal — plated, packaged or in-hand, shot to make people want to order.",
+      "Styling and lighting built around texture and steam — plated, boxed, or in-hand, shot the way it'll actually look on the app.",
     features: [
       "Food styling & plating direction",
       "Natural & studio lighting setups",
@@ -73,7 +73,7 @@ const SERVICE_CATEGORIES = [
     icon: Gem,
     tagline: "Detail work that shows what makes it worth the price.",
     description:
-      "Macro-level lighting and retouching for jewelry and small luxury items, where every facet, stone and finish needs to hold up close.",
+      "Macro lighting and retouching for jewelry and small luxury pieces, shot close enough that every stone and finish has to hold up.",
     features: [
       "Macro & close-up detail capture",
       "Reflection & sparkle-safe lighting",
@@ -102,7 +102,7 @@ const DELIVERABLES = [
     icon: RotateCw,
     title: "360° Product Spin",
     description:
-      "A full interactive rotation, giving online shoppers the closest thing to holding it.",
+      "Drag to rotate, right inside the listing — shoppers see every side before adding to cart.",
     color: "#FF8B6B",
   },
   {
@@ -282,10 +282,10 @@ export function ProductPhotography() {
               </span>
             </span>
             <h2 className="mt-5 font-display text-3xl font-semibold text-ink sm:text-4xl">
-              Pick a shoot type,
+              Studio, food, spin or macro —
             </h2>
             <h2 className="font-display text-3xl font-semibold text-ion sm:text-4xl">
-              see how we run it.
+              every shoot runs a little differently.
             </h2>
           </motion.div>
 

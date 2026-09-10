@@ -248,8 +248,7 @@ export function WhatsAppMarketing() {
             transition={{ duration: 0.9, ease: EASE, delay: 0.1 }}
             className="mt-6 font-display text-display-1 font-semibold text-ink sm:mt-8"
           >
-            WhatsApp{" "}
-            <span className="italic text-ion">Marketing</span>
+            WhatsApp <span className="italic text-ion">Marketing</span>
           </motion.h1>
 
           <motion.p
@@ -260,8 +259,7 @@ export function WhatsAppMarketing() {
             className="mx-auto mt-6 max-w-2xl text-base text-mist sm:text-lg"
           >
             We set up, automate and run your WhatsApp channel end to end —
-            campaigns, bots and API integrations that turn chats into
-            customers.
+            campaigns, bots and API integrations that turn chats into customers.
           </motion.p>
 
           <motion.div
@@ -312,10 +310,10 @@ export function WhatsAppMarketing() {
               </span>
             </span>
             <h2 className="mt-5 font-display text-3xl font-semibold text-ink sm:text-4xl">
-              Pick a capability,
+              Broadcasts, bots, API, leads —
             </h2>
             <h2 className="font-display text-3xl font-semibold text-ion sm:text-4xl">
-              see how we run it.
+              WhatsApp does more than send messages.
             </h2>
           </motion.div>
 
@@ -454,10 +452,10 @@ export function WhatsAppMarketing() {
               What's included
             </p>
             <h2 className="mt-4 font-display text-3xl font-semibold text-ink sm:text-4xl">
-              Everything your WhatsApp channel needs,
+              API setup, bots and broadcasts,
             </h2>
             <h2 className="font-display text-3xl font-semibold text-ion sm:text-4xl">
-              run by one accountable team.
+              set up once and kept running.
             </h2>
           </motion.div>
 
@@ -471,7 +469,11 @@ export function WhatsAppMarketing() {
             {DELIVERABLES.map((item) => {
               const Icon = item.icon;
               return (
-                <motion.div key={item.title} variants={fadeUp} className="group">
+                <motion.div
+                  key={item.title}
+                  variants={fadeUp}
+                  className="group"
+                >
                   <GlassPanel className="relative h-full overflow-hidden p-6 transition-all duration-500 group-hover:-translate-y-1">
                     <div
                       className="pointer-events-none absolute -right-14 -top-14 h-28 w-28 rounded-full opacity-0 blur-3xl transition-all duration-700 group-hover:scale-150 group-hover:opacity-100"

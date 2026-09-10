@@ -594,6 +594,7 @@ function ModuleShowcase({ items, dashboards }) {
                   <img
                     src={active.image}
                     alt={active.title}
+                    loading="lazy"
                     className="h-36 w-full shrink-0 object-cover sm:h-44"
                   />
                   {/* Tab bar — sits right under the banner, persistent across tabs */}
@@ -1522,8 +1523,8 @@ export function SoftwarePortfolio() {
             transition={{ duration: 0.7, ease: EASE, delay: 0.1 }}
             className="mt-5 font-display text-3xl font-semibold text-ink md:text-5xl"
           >
-            Have a product idea{" "}
-            <span className="italic text-ion">in mind?</span>
+            Still running the business{" "}
+            <span className="italic text-ion">on spreadsheets?</span>
           </motion.h2>
 
           <motion.p
@@ -1533,8 +1534,9 @@ export function SoftwarePortfolio() {
             transition={{ duration: 0.6, ease: EASE, delay: 0.2 }}
             className="mx-auto mt-5 max-w-xl text-mist"
           >
-            Let's talk about building your next CRM, ERP, HRMS, or internal tool
-            — starting with what's actually breaking right now.
+            Tell us what's breaking — a CRM, an ERP, an HRMS, or something more
+            specific to how your team actually works — and we'll scope it
+            properly.
           </motion.p>
 
           <motion.div

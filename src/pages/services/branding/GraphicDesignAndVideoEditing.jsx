@@ -43,7 +43,7 @@ const SERVICE_CATEGORIES = [
     id: "social-media-creatives",
     label: "Social Media Creatives",
     icon: Image,
-    tagline: "Feeds that look like a brand, not a scramble.",
+    tagline: "A feed that looks planned, not patched together.",
     description:
       "Post, story and carousel designs built on a consistent visual system, so every platform still looks like it belongs to the same brand.",
     features: [
@@ -71,9 +71,9 @@ const SERVICE_CATEGORIES = [
     id: "banner-design",
     label: "Banner Design",
     icon: LayoutTemplate,
-    tagline: "Ads and banners that earn the click.",
+    tagline: "Banners sized right and built to get noticed.",
     description:
-      "Web banners, ad creatives and display sets designed to a size spec and built to stop the scroll, not just fill the space.",
+      "Web banners, ad creatives and display sets built to spec — sized correctly for where they'll actually run, not stretched to fit.",
     features: [
       "Multi-size ad & display banner sets",
       "Web, social & print banner formats",
@@ -230,9 +230,9 @@ export function GraphicDesignAndVideoEditing() {
             transition={{ duration: 0.9, ease: EASE, delay: 0.25 }}
             className="mx-auto mt-6 max-w-2xl text-base text-mist sm:text-lg"
           >
-            From logos to launch videos, we design and edit everything a
-            brand puts in front of people — built on one consistent visual
-            system, not scattered one-offs.
+            From logos to launch videos, we design and edit everything a brand
+            puts in front of people — built on one consistent visual system, not
+            scattered one-offs.
           </motion.p>
 
           <motion.div
@@ -283,10 +283,10 @@ export function GraphicDesignAndVideoEditing() {
               </span>
             </span>
             <h2 className="mt-5 font-display text-3xl font-semibold text-ink sm:text-4xl">
-              Pick a format,
+              Logo, feed, banner, cut —
             </h2>
             <h2 className="font-display text-3xl font-semibold text-ion sm:text-4xl">
-              see how we design it.
+              tap one to see the work.
             </h2>
           </motion.div>
 
@@ -544,7 +544,7 @@ export function GraphicDesignAndVideoEditing() {
                 <ul className="mt-5 flex flex-col gap-4">
                   {[
                     "One team handling design and video, so every piece looks like it belongs to the same brand.",
-                    "Structured revision rounds instead of endless back-and-forth.",
+                    "Clear rounds of feedback, with a defined stopping point — not open-ended tweaks.",
                     "Source files and guidelines delivered, not just flattened exports.",
                   ].map((point) => (
                     <li
@@ -578,7 +578,9 @@ export function GraphicDesignAndVideoEditing() {
           >
             Ready for design
             <br className="hidden sm:block" />{" "}
-            <span className="italic text-ion">that actually looks like you?</span>
+            <span className="italic text-ion">
+              that actually looks like you?
+            </span>
           </motion.h2>
           <motion.div
             initial={{ opacity: 0, y: 16 }}
