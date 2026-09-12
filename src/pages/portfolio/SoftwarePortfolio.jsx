@@ -1001,7 +1001,7 @@ export function SoftwarePortfolio() {
       </section> */}
 
       {/* ================= Hero (no bg — sits on global background) ================= */}
-      <section className="relative z-10 mx-auto grid max-w-6xl gap-12 px-6 pb-16 pt-28 md:grid-cols-[1fr_0.9fr] md:items-center md:gap-6 md:pt-36 lg:grid-cols-[1.1fr_1fr] lg:gap-8 lg:pt-40">
+      <section className="relative z-10 mx-auto grid min-h-svh max-w-6xl items-center gap-12 px-6 pb-16 pt-28 md:grid-cols-[1fr_0.9fr] md:gap-6 md:pt-36 lg:grid-cols-[1.1fr_1fr] lg:gap-8 lg:pt-40">
         <div className="pointer-events-none absolute -top-40 left-1/2 h-[700px] w-[1000px] -translate-x-1/2 rounded-full bg-ion/10 blur-[160px]" />
         <div className="pointer-events-none absolute bottom-0 right-0 h-[400px] w-[400px] rounded-full bg-ion/5 blur-[120px]" />
 

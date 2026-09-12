@@ -6,13 +6,18 @@ import { CASE_STUDIES } from "../../data/caseStudies";
 import { cn } from "../../lib/utils";
 
 // cycle through accent gradients per card so the grid doesn't look flat
-const GRADIENTS = [
-  "linear-gradient(160deg, rgba(34,211,238,0.25), rgba(8,9,14,0.4))",
-  "linear-gradient(160deg, rgba(167,139,250,0.25), rgba(8,9,14,0.4))",
-  "linear-gradient(160deg, rgba(244,114,182,0.25), rgba(8,9,14,0.4))",
-  "linear-gradient(160deg, rgba(52,211,153,0.25), rgba(8,9,14,0.4))",
-];
-const ACCENTS = ["#22d3ee", "#a78bfa", "#f472b6", "#34d399"];
+// const GRADIENTS = [
+//   "linear-gradient(160deg, rgba(34,211,238,0.25), rgba(8,9,14,0.4))",
+//   "linear-gradient(160deg, rgba(167,139,250,0.25), rgba(8,9,14,0.4))",
+//   "linear-gradient(160deg, rgba(244,114,182,0.25), rgba(8,9,14,0.4))",
+//   "linear-gradient(160deg, rgba(52,211,153,0.25), rgba(8,9,14,0.4))",
+// ];
+// const ACCENTS = ["#22d3ee", "#a78bfa", "#f472b6", "#34d399"];
+
+const ACCENTS = ["#4E86FF", "#7FB4FF", "#7F5FFF", "#FF8B6B"];
+const GRADIENTS = ACCENTS.map(
+  (c) => `linear-gradient(160deg, ${c}40, rgba(8,9,14,0.4))`,
+);
 
 const fadeUp = {
   hidden: { opacity: 0, y: 32 },
@@ -105,7 +110,7 @@ export function WorkShowcase() {
                       style={{
                         borderColor: isHovered
                           ? accent
-                          : "var(--line, #2a2d3a)",
+                          : "rgba(243,245,249,0.08)",
                         backgroundColor: isHovered
                           ? `${accent}1a`
                           : "transparent",

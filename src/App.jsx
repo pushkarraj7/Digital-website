@@ -10,6 +10,11 @@ import { SmoothScroll } from "./components/layout/SmoothScroll";
 import { PageTransition } from "./components/layout/PageTransition";
 import { ErrorBoundary } from "./components/layout/ErrorBoundary";
 import { Home } from "./pages/Home"; // kept eager — it's the most common entry point
+import {
+  RouteProgressProvider,
+  useRouteProgress,
+} from "./hooks/useRouteProgress";
+import { TopProgressBar } from "./components/layout/TopProgressBar";
 
 // Every other route is code-split: each page's JS is only fetched
 // when a user actually navigates to it, instead of bloating the
@@ -20,14 +25,29 @@ const About = lazy(() =>
 const Contact = lazy(() =>
   import("./pages/Contact").then((m) => ({ default: m.Contact })),
 );
+
 const Blog = lazy(() =>
   import("./pages/Blog").then((m) => ({ default: m.Blog })),
 );
+
+const BlogPost = lazy(() =>
+  import("./pages/BlogPost").then((m) => ({ default: m.BlogPost })),
+);
+
 const CaseStudy = lazy(() =>
   import("./pages/CaseStudy").then((m) => ({ default: m.CaseStudy })),
 );
 const NotFound = lazy(() =>
   import("./pages/NotFound").then((m) => ({ default: m.NotFound })),
+);
+
+const PrivacyPolicy = lazy(() =>
+  import("./pages/DataPolicy").then((m) => ({ default: m.PrivacyPolicy })),
+);
+const TermsAndConditions = lazy(() =>
+  import("./pages/TermsAndConditions").then((m) => ({
+    default: m.TermsAndConditions,
+  })),
 );
 
 const SocialMediaMarketing = lazy(() =>
@@ -80,6 +100,18 @@ const CustomNfcCard = lazy(() =>
     default: m.CustomNfcCard,
   })),
 );
+
+const PodcastStudioSpace = lazy(() =>
+  import("./pages/services/branding/PodcastStudioSpace").then((m) => ({
+    default: m.PodcastStudioSpace,
+  })),
+);
+const StudioShoot = lazy(() =>
+  import("./pages/services/branding/StudioShoot").then((m) => ({
+    default: m.StudioShoot,
+  })),
+);
+
 const SoftwareDevelopment = lazy(() =>
   import("./pages/services/it-solution/SoftwareDevelopment").then((m) => ({
     default: m.SoftwareDevelopment,
@@ -142,214 +174,146 @@ function useGlobalScrollRef() {
   return scrollRef;
 }
 
+// Signals "this page has actually mounted" — placed inside each route's
+// Suspense boundary so it only fires once the real chunk has loaded,
+// not on a timer.
+function RouteProgressDone() {
+  const { done } = useRouteProgress();
+  useEffect(() => {
+    done();
+  }, [done]);
+  return null;
+}
+
+function PageWrapper({ Component }) {
+  return (
+    <PageTransition>
+      <Suspense fallback={<div className="min-h-[60vh]" />}>
+        <Component />
+        <RouteProgressDone />
+      </Suspense>
+    </PageTransition>
+  );
+}
 function AnimatedRoutes() {
   const location = useLocation();
 
   return (
     <AnimatePresence mode="wait">
-      <Suspense fallback={<div className="min-h-[60vh]" />}>
-        <Routes location={location} key={location.pathname}>
-          <Route
-            path="/"
-            element={
-              <PageTransition>
-                <Home />
-              </PageTransition>
-            }
-          />
-          <Route
-            path="/work/:slug"
-            element={
-              <PageTransition>
-                <CaseStudy />
-              </PageTransition>
-            }
-          />
-          <Route
-            path="*"
-            element={
-              <PageTransition>
-                <NotFound />
-              </PageTransition>
-            }
-          />
+      <Routes location={location} key={location.pathname}>
+        <Route
+          path="/"
+          element={
+            <PageTransition>
+              <Home />
+              <RouteProgressDone />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/work/:slug"
+          element={<PageWrapper Component={CaseStudy} />}
+        />
+        <Route path="*" element={<PageWrapper Component={NotFound} />} />
 
-          <Route
-            path="/about"
-            element={
-              <PageTransition>
-                <About />
-              </PageTransition>
-            }
-          />
-          <Route
-            path="/contact"
-            element={
-              <PageTransition>
-                <Contact />
-              </PageTransition>
-            }
-          />
+        <Route path="/about" element={<PageWrapper Component={About} />} />
+        <Route path="/contact" element={<PageWrapper Component={Contact} />} />
 
-          <Route
-            path="/blog"
-            element={
-              <PageTransition>
-                <Blog />
-              </PageTransition>
-            }
-          />
-          <Route
-            path="/services/digital-marketing/social-media-marketing-management"
-            element={
-              <PageTransition>
-                <SocialMediaMarketing />
-              </PageTransition>
-            }
-          />
-          <Route
-            path="/services/digital-marketing/google-business-management"
-            element={
-              <PageTransition>
-                <GoogleBusinessManagement />
-              </PageTransition>
-            }
-          />
+        <Route path="/blog" element={<PageWrapper Component={Blog} />} />
+        <Route
+          path="/blog/:slug"
+          element={<PageWrapper Component={BlogPost} />}
+        />
 
-          <Route
-            path="/services/digital-marketing/lead-generation-program"
-            element={
-              <PageTransition>
-                <LeadGenerationProgram />
-              </PageTransition>
-            }
-          />
+        <Route
+          path="/services/digital-marketing/social-media-marketing-management"
+          element={<PageWrapper Component={SocialMediaMarketing} />}
+        />
+        <Route
+          path="/services/digital-marketing/google-business-management"
+          element={<PageWrapper Component={GoogleBusinessManagement} />}
+        />
+        <Route
+          path="/services/digital-marketing/lead-generation-program"
+          element={<PageWrapper Component={LeadGenerationProgram} />}
+        />
+        <Route
+          path="/services/digital-marketing/online-advertise-campaign"
+          element={<PageWrapper Component={OnlineAdvertiseCampaign} />}
+        />
+        <Route
+          path="/services/digital-marketing/whatsapp-marketing"
+          element={<PageWrapper Component={WhatsAppMarketing} />}
+        />
 
-          <Route
-            path="/services/digital-marketing/online-advertise-campaign"
-            element={
-              <PageTransition>
-                <OnlineAdvertiseCampaign />
-              </PageTransition>
-            }
-          />
+        <Route
+          path="/services/branding/property-360-virtual-tour"
+          element={<PageWrapper Component={Property360VirtualTour} />}
+        />
+        <Route
+          path="/services/branding/google-360-virtual-tour"
+          element={<PageWrapper Component={Google360VirtualTour} />}
+        />
+        <Route
+          path="/services/branding/graphic-design-and-video-editing"
+          element={<PageWrapper Component={GraphicDesignAndVideoEditing} />}
+        />
+        <Route
+          path="/services/branding/product-photography"
+          element={<PageWrapper Component={ProductPhotography} />}
+        />
+        <Route
+          path="/services/branding/custom-nfc-card"
+          element={<PageWrapper Component={CustomNfcCard} />}
+        />
+        <Route
+          path="/services/branding/podcast-studio-space"
+          element={<PageWrapper Component={PodcastStudioSpace} />}
+        />
+        <Route
+          path="/services/branding/studio-shoot"
+          element={<PageWrapper Component={StudioShoot} />}
+        />
 
-          <Route
-            path="/services/digital-marketing/whatsapp-marketing"
-            element={
-              <PageTransition>
-                <WhatsAppMarketing />
-              </PageTransition>
-            }
-          />
+        <Route
+          path="/services/it-solution/software-development"
+          element={<PageWrapper Component={SoftwareDevelopment} />}
+        />
+        <Route
+          path="/services/it-solution/application-development"
+          element={<PageWrapper Component={ApplicationDevelopment} />}
+        />
+        <Route
+          path="/services/it-solution/website-design-and-development"
+          element={<PageWrapper Component={WebsiteDesignAndDevelopment} />}
+        />
 
-          <Route
-            path="/services/branding/property-360-virtual-tour"
-            element={
-              <PageTransition>
-                <Property360VirtualTour />
-              </PageTransition>
-            }
-          />
+        <Route
+          path="/portfolio/software"
+          element={<PageWrapper Component={SoftwarePortfolio} />}
+        />
+        <Route
+          path="/portfolio/website-development"
+          element={<PageWrapper Component={WebsiteDevelopmentPortfolio} />}
+        />
+        <Route
+          path="/portfolio/graphic-design"
+          element={<PageWrapper Component={GraphicDesignPortfolio} />}
+        />
+        <Route
+          path="/portfolio/social-media"
+          element={<PageWrapper Component={SocialMediaPortfolio} />}
+        />
 
-          <Route
-            path="/services/branding/google-360-virtual-tour"
-            element={
-              <PageTransition>
-                <Google360VirtualTour />
-              </PageTransition>
-            }
-          />
-          <Route
-            path="/services/branding/graphic-design-and-video-editing"
-            element={
-              <PageTransition>
-                <GraphicDesignAndVideoEditing />
-              </PageTransition>
-            }
-          />
-
-          <Route
-            path="/services/branding/product-photography"
-            element={
-              <PageTransition>
-                <ProductPhotography />
-              </PageTransition>
-            }
-          />
-
-          <Route
-            path="/services/branding/custom-nfc-card"
-            element={
-              <PageTransition>
-                <CustomNfcCard />
-              </PageTransition>
-            }
-          />
-
-          <Route
-            path="/services/it-solution/software-development"
-            element={
-              <PageTransition>
-                <SoftwareDevelopment />
-              </PageTransition>
-            }
-          />
-
-          <Route
-            path="/services/it-solution/application-development"
-            element={
-              <PageTransition>
-                <ApplicationDevelopment />
-              </PageTransition>
-            }
-          />
-
-          <Route
-            path="/services/it-solution/website-design-and-development"
-            element={
-              <PageTransition>
-                <WebsiteDesignAndDevelopment />
-              </PageTransition>
-            }
-          />
-
-          <Route
-            path="/portfolio/software"
-            element={
-              <PageTransition>
-                <SoftwarePortfolio />
-              </PageTransition>
-            }
-          />
-
-          <Route
-            path="/portfolio/website-development"
-            element={
-              <PageTransition>
-                <WebsiteDevelopmentPortfolio />
-              </PageTransition>
-            }
-          />
-
-          <Route
-            path="/portfolio/graphic-design"
-            element={
-              <PageTransition>
-                <GraphicDesignPortfolio />
-              </PageTransition>
-            }
-          />
-          <Route
-            path="/portfolio/social-media"
-            element={
-              <PageTransition>
-                <SocialMediaPortfolio />
-              </PageTransition>
-            }
-          />
-        </Routes>
-      </Suspense>
+        <Route
+          path="/privacy-policy"
+          element={<PageWrapper Component={PrivacyPolicy} />}
+        />
+        <Route
+          path="/terms-conditions"
+          element={<PageWrapper Component={TermsAndConditions} />}
+        />
+      </Routes>
     </AnimatePresence>
   );
 }
@@ -358,52 +322,50 @@ export default function App() {
   const prefersReducedMotion = useReducedMotion();
   const isDesktop = useIsDesktop();
   const scrollRef = useGlobalScrollRef();
-  console.log("DEBUG is Desktop:", isDesktop, "width:", window.innerWidth);
 
   return (
     <BrowserRouter>
-      <SmoothScroll enabled={isDesktop && !prefersReducedMotion}>
-        <div className="relative min-h-screen bg-void text-ink antialiased selection:bg-ion/30 selection:text-ink">
-          {isDesktop && !prefersReducedMotion && (
-            <Suspense fallback={null}>
-              <CustomCursor />
-            </Suspense>
-          )}
+      <RouteProgressProvider>
+        <TopProgressBar />
+        <SmoothScroll enabled={isDesktop && !prefersReducedMotion}>
+          <div className="relative min-h-screen bg-void text-ink antialiased selection:bg-ion/30 selection:text-ink">
+            {isDesktop && !prefersReducedMotion && (
+              <Suspense fallback={null}>
+                <CustomCursor />
+              </Suspense>
+            )}
+            {isDesktop && !prefersReducedMotion && (
+              <Suspense fallback={null}>
+                <GrowthField
+                  scrollRef={scrollRef}
+                  className="pointer-events-none fixed inset-0 z-0 opacity-90"
+                />
+              </Suspense>
+            )}
 
-          {isDesktop && !prefersReducedMotion && (
-            <Suspense fallback={null}>
-              <GrowthField
-                scrollRef={scrollRef}
-                className="pointer-events-none fixed inset-0 z-0 opacity-90"
-              />
-            </Suspense>
-          )}
+            <Navbar />
 
-          <Navbar />
+            <main className="relative z-10">
+              <ErrorBoundary
+                fallback={
+                  <div className="flex min-h-[60vh] flex-col items-center justify-center gap-3 px-6 text-center">
+                    <p className="font-display text-2xl text-ink">
+                      Something went wrong.
+                    </p>
+                    <p className="max-w-sm text-sm text-mist">
+                      This section hit an error. Try refreshing the page.
+                    </p>
+                  </div>
+                }
+              >
+                <AnimatedRoutes />
+              </ErrorBoundary>
+            </main>
 
-          <main className="relative z-10">
-            {/* Route-level boundary: a crash in either page falls back to a
-                message instead of unmounting the whole app (nav/footer
-                stay intact so the user isn't left on a truly blank page). */}
-            <ErrorBoundary
-              fallback={
-                <div className="flex min-h-[60vh] flex-col items-center justify-center gap-3 px-6 text-center">
-                  <p className="font-display text-2xl text-ink">
-                    Something went wrong.
-                  </p>
-                  <p className="max-w-sm text-sm text-mist">
-                    This section hit an error. Try refreshing the page.
-                  </p>
-                </div>
-              }
-            >
-              <AnimatedRoutes />
-            </ErrorBoundary>
-          </main>
-
-          <Footer className="relative z-10" />
-        </div>
-      </SmoothScroll>
+            <Footer className="relative z-10" />
+          </div>
+        </SmoothScroll>
+      </RouteProgressProvider>
     </BrowserRouter>
   );
 }

@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { TrendingUp, Target, Users, TrendingDown } from "lucide-react";
 import { AnimatedCounter } from "../ui/AnimatedCounter";
+import { ACCENTS } from "../../lib/constants";
 
 const METRICS = [
   {
@@ -9,7 +10,7 @@ const METRICS = [
     suffix: "%",
     label: "Organic visibility",
     icon: TrendingUp,
-    color: "#22d3ee",
+    color: ACCENTS[0],
     large: true,
   },
   {
@@ -17,7 +18,7 @@ const METRICS = [
     suffix: "\u00d7",
     label: "Campaign ROAS",
     icon: Target,
-    color: "#a78bfa",
+    color: ACCENTS[1],
   },
   {
     value: 126,
@@ -25,14 +26,14 @@ const METRICS = [
     suffix: "%",
     label: "Qualified leads",
     icon: Users,
-    color: "#f472b6",
+    color: ACCENTS[2],
   },
   {
     value: 68,
     suffix: "%",
     label: "Lower acquisition cost",
     icon: TrendingDown,
-    color: "#34d399",
+    color: ACCENTS[3],
   },
 ];
 
@@ -48,12 +49,10 @@ const fadeUp = {
 export function ResultsSection() {
   return (
     <section id="results" className="relative px-4 py-16 sm:px-6 sm:py-24">
-      {/* soft ambient glow behind the numbers */}
       <div
         className="pointer-events-none absolute left-1/2 top-1/2 h-[500px] w-[900px] -translate-x-1/2 -translate-y-1/2 opacity-[0.07]"
         style={{
-          background:
-            "radial-gradient(ellipse at center, #22d3ee, transparent 70%)",
+          background: `radial-gradient(ellipse at center, ${ACCENTS[0]}, transparent 70%)`,
         }}
       />
 
@@ -89,8 +88,6 @@ export function ResultsSection() {
                 variants={fadeUp}
                 className="group relative overflow-hidden bg-white/[0.02] p-5 transition-all duration-500 hover:-translate-y-1 sm:p-8 lg:p-10"
               >
-                {/* hover glow */}
-                {/* hover glow */}
                 <div
                   className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
                   style={{
@@ -98,15 +95,11 @@ export function ResultsSection() {
                   }}
                 />
 
-                {/* corner glow */}
                 <div
                   className="pointer-events-none absolute -right-20 -top-20 h-40 w-40 rounded-full opacity-0 blur-3xl transition-all duration-700 group-hover:scale-150 group-hover:opacity-100"
-                  style={{
-                    backgroundColor: `${metric.color}20`,
-                  }}
+                  style={{ backgroundColor: `${metric.color}20` }}
                 />
 
-                {/* top accent */}
                 <div
                   className="pointer-events-none absolute left-1/2 top-0 h-px w-0 -translate-x-1/2 transition-all duration-700 group-hover:w-2/3"
                   style={{
@@ -157,11 +150,6 @@ export function ResultsSection() {
             );
           })}
         </div>
-
-        {/* <p className="mt-8 text-xs text-haze">
-          Demo figures shown for illustration. Replace with real campaign data
-          before launch.
-        </p> */}
       </div>
     </section>
   );

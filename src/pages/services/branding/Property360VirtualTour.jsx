@@ -224,7 +224,7 @@ export function Property360VirtualTour() {
   return (
     <>
       {/* ---------- Hero ---------- */}
-      <section className="relative overflow-hidden px-4 pb-16 pt-32 sm:px-6 sm:pb-24 sm:pt-40">
+      <section className="relative flex min-h-svh flex-col items-center justify-center overflow-hidden px-4 pb-16 pt-32 sm:px-6 sm:pb-24 sm:pt-40">
         <div
           className="pointer-events-none absolute left-1/2 top-0 h-[420px] w-[700px] -translate-x-1/2 rounded-full bg-ion/20 opacity-40 blur-[150px]"
           aria-hidden

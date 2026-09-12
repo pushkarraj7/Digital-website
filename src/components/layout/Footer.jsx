@@ -109,7 +109,7 @@ export function Footer() {
       <div
         className="pointer-events-none absolute -top-24 right-0 h-64 w-64 rounded-full opacity-10 blur-[100px]"
         style={{
-          background: "radial-gradient(circle, #60a5ff, transparent 70%)",
+          background: "radial-gradient(circle, #7FB4FF, transparent 70%)",
         }}
       />
 
@@ -286,18 +286,18 @@ export function Footer() {
           </div>
 
           <div className="flex items-center gap-6">
-            <a
-              href="#"
+            <Link
+              to="/privacy-policy"
               className="text-xs text-mist transition-colors hover:text-ink"
             >
               Privacy Policy
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              to="/terms-conditions"
               className="text-xs text-mist transition-colors hover:text-ink"
             >
               Terms
-            </a>
+            </Link>
           </div>
         </div>
       </div>

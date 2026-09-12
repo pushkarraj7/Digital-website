@@ -27,6 +27,10 @@ export function SmoothScroll({ children, enabled = true }) {
         smoothWheel: true,
       });
       lenisRef.current = lenis;
+      // Exposed so overlays (modals, dropdowns) outside this component's
+      // tree can pause/resume Lenis directly — stopPropagation alone
+      // can't stop it, since Lenis listens on window itself.
+      window.__lenis = lenis;
 
       const loop = (time) => {
         lenis.raf(time);
@@ -39,6 +43,8 @@ export function SmoothScroll({ children, enabled = true }) {
       cancelled = true;
       if (raf) cancelAnimationFrame(raf);
       if (lenis) lenis.destroy();
+      lenisRef.current = null;
+      if (window.__lenis === lenis) window.__lenis = null;
     };
   }, [reducedMotion, enabled]);
 
@@ -46,6 +52,10 @@ export function SmoothScroll({ children, enabled = true }) {
   useEffect(() => {
     if (lenisRef.current) {
       lenisRef.current.scrollTo(0, { immediate: true });
+      // Content height can change after Suspense resolves (images, lazy
+      // sections, etc.) — resize keeps Lenis's scroll bounds accurate.
+      const id = requestAnimationFrame(() => lenisRef.current?.resize());
+      return () => cancelAnimationFrame(id);
     } else {
       window.scrollTo(0, 0);
     }

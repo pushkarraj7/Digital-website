@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { ACCENTS_EXTENDED } from "../../lib/constants";
 import {
   motion,
   useScroll,
@@ -23,7 +24,7 @@ const STEPS = [
     title: "Discover",
     short: "Understanding the business before touching anything else.",
     copy: "Before we touch a single design file, we spend real time understanding the business — the market it's competing in, what customers actually think of it, and where growth is quietly leaking out.",
-    color: "#22d3ee",
+    color: ACCENTS_EXTENDED[0],
     icon: Compass,
     deliverables: [
       "Market & competitor audit",
@@ -36,7 +37,7 @@ const STEPS = [
     title: "Position",
     short: "Finding the angle nobody else in the category has claimed.",
     copy: "Most categories are more crowded than they look. We dig for the angle a competitor hasn't claimed yet, and build messaging around that instead of repeating what everyone else is already saying.",
-    color: "#6366f1",
+    color: ACCENTS_EXTENDED[1],
     icon: Target,
     deliverables: [
       "Positioning statement",
@@ -49,7 +50,7 @@ const STEPS = [
     title: "Create",
     short: "Building the brand and experience around that position.",
     copy: "This is where the brand and the digital experience actually get built — identity, guidelines, and the website or product people will spend time in. Nothing here is arbitrary; every choice ties back to the positioning.",
-    color: "#a78bfa",
+    color: ACCENTS_EXTENDED[2],
     icon: Sparkles,
     deliverables: [
       "Visual identity system",
@@ -62,7 +63,7 @@ const STEPS = [
     title: "Activate",
     short: "Launching it properly across the channels that matter.",
     copy: "A brand sitting quietly does nothing. We launch it properly — campaigns, content, and a channel plan built for where your audience actually spends their time, not a generic checklist.",
-    color: "#f472b6",
+    color: ACCENTS_EXTENDED[3],
     icon: Rocket,
     deliverables: [
       "Launch campaign",
@@ -75,7 +76,7 @@ const STEPS = [
     title: "Optimize",
     short: "Watching real behavior instead of relying on assumptions.",
     copy: "Once real traffic and real customers are in the picture, assumptions stop mattering. We watch what the data actually shows and adjust — that's usually where the biggest wins are hiding.",
-    color: "#fb923c",
+    color: ACCENTS_EXTENDED[4],
     icon: LineChart,
     deliverables: [
       "Performance dashboards",
@@ -88,7 +89,7 @@ const STEPS = [
     title: "Grow",
     short: "Doubling down on what's proven to work, cutting what isn't.",
     copy: "By this stage we know exactly which channels, creative, and campaigns are pulling their weight — so we double down on those and cut what isn't earning its budget.",
-    color: "#34d399",
+    color: ACCENTS_EXTENDED[5],
     icon: TrendingUp,
     deliverables: [
       "Scaling playbook",
@@ -191,8 +192,8 @@ export function MethodJourney() {
                           borderColor:
                             isActive || isPast
                               ? step.color
-                              : "var(--line, #2a2d3a)",
-                          backgroundColor: "var(--void, #0a0a0f)",
+                              : "rgba(243,245,249,0.08)",
+                          backgroundColor: "#070A10",
                           boxShadow: isActive
                             ? `0 0 16px ${step.color}55`
                             : "none",
@@ -207,9 +208,7 @@ export function MethodJourney() {
                           <Icon
                             className="h-3.5 w-3.5 transition-colors duration-500"
                             style={{
-                              color: isActive
-                                ? step.color
-                                : "var(--haze, #6b7280)",
+                              color: isActive ? step.color : "#5A6478",
                             }}
                           />
                         )}

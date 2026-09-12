@@ -1,20 +1,17 @@
-// src/pages/services/branding/Google360VirtualTour.jsx
+// src/pages/services/branding/StudioShoot.jsx
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Sparkles,
   Layers,
-  Building2,
-  Store,
-  Map,
-  Navigation,
-  Camera,
-  Search,
+  UserRound,
+  Briefcase,
+  Shirt,
+  PartyPopper,
   ArrowRight,
   CheckCircle2,
-  MapPin,
-  Globe,
-  TrendingUp,
+  Camera,
+  Palette,
 } from "lucide-react";
 import { GlassPanel } from "../../../components/ui/GlassPanel";
 import { MagneticButton } from "../../../components/ui/MagneticButton";
@@ -29,187 +26,158 @@ import {
 // right when that tab is active.
 const SERVICE_CATEGORIES = [
   {
-    id: "business-virtual-tour",
-    label: "Business Virtual Tour",
-    icon: Building2,
-    tagline: "Let customers walk in before they ever visit.",
+    id: "portrait-session",
+    label: "Portrait Session",
+    icon: UserRound,
+    tagline: "A photo that actually looks like you, on a good day.",
     description:
-      "A full 360° walkthrough of your business, built specifically for Google — so anyone searching for you can look around before deciding to come in.",
+      "One-on-one session built around how you want to be seen — for a profile picture, a personal brand, or just an updated photo that isn't five years old.",
     features: [
-      "Full-premises 360° capture",
-      "Google-certified tour format",
-      "Click through from room to room, no reloading",
-      "Published directly to your Business Profile",
+      "One-on-one styling & posing direction",
+      "Multiple backdrop & lighting looks",
+      "Outfit changes on request",
+      "Retouched final selects delivered",
     ],
   },
   {
-    id: "store-view-setup",
-    label: "Store View Setup",
-    icon: Store,
-    tagline: "Turn browsers into walk-ins.",
+    id: "corporate-headshots",
+    label: "Corporate Headshots",
+    icon: Briefcase,
+    tagline: "The whole team, shot the same day, looking like one company.",
     description:
-      "For retail and storefront businesses, a Street View-style interior gives shoppers a real look at layout, stock and atmosphere before they arrive.",
+      "On-site or in-studio headshot day for the full team — same backdrop, same lighting, same crop — so LinkedIn and the website team page actually match.",
     features: [
-      "Aisle-by-aisle interior capture",
-      "Storefront & entrance coverage",
-      "Google Maps Street View placement",
-      "Optimized for mobile browsing",
+      "Consistent backdrop & lighting per batch",
+      "Fast per-person turnaround (5–10 min)",
+      "Naming & export ready for HR/LinkedIn use",
+      "On-site setup available for larger teams",
     ],
   },
   {
-    id: "interior-mapping",
-    label: "Interior Mapping",
-    icon: Map,
-    tagline: "A layout customers can actually navigate.",
+    id: "fashion-editorial",
+    label: "Fashion & Editorial",
+    icon: Shirt,
+    tagline: "Shot for a lookbook, not a family album.",
     description:
-      "We map the full interior into a connected, clickable path — so a first-time visitor already knows where to go before they walk through the door.",
+      "Styled shoots for designers, stylists and personal labels — direction on posing, movement and mood, edited with the same eye a magazine spread would get.",
     features: [
-      "Full interior floor coverage",
-      "Connected, clickable navigation path",
-      "Section & department labeling",
-      "Accurate spatial layout",
+      "Creative direction & mood boarding",
+      "Multiple outfit & set changes",
+      "Hair & makeup coordination on request",
+      "Editorial-grade color grading",
     ],
   },
   {
-    id: "street-view-integration",
-    label: "Street View Integration",
-    icon: Navigation,
-    tagline: "Get your business onto Google Street View, properly.",
+    id: "event-coverage",
+    label: "Event Coverage",
+    icon: PartyPopper,
+    tagline: "Launches, birthdays and everything in between.",
     description:
-      "Certified capture and publishing that places your business directly inside Google Street View and Maps — where local searches actually happen.",
+      "In-studio or on-location coverage for launches, celebrations and small events — candid shots alongside the posed ones, without a crew getting in the way.",
     features: [
-      "Google Street View trusted publishing",
-      "Direct Maps & Search placement",
-      "Location pin & entrance accuracy",
-      "Ongoing visibility, no expiry",
-    ],
-  },
-  {
-    id: "virtual-tour-photography",
-    label: "Virtual Tour Photography",
-    icon: Camera,
-    tagline: "Photography built for the tour, not just for show.",
-    description:
-      "Every shot captured and lit specifically for 360° stitching — sharp, consistent, and ready to move a visitor smoothly from scene to scene.",
-    features: [
-      "Professional 360° photography",
-      "HDR-balanced lighting on every shot",
-      "Consistent exposure across scenes",
-      "High-resolution, zoom-ready images",
-    ],
-  },
-  {
-    id: "business-listing-optimization",
-    label: "Business Listing Optimization",
-    icon: Search,
-    tagline: "Make sure the tour actually gets found.",
-    description:
-      "The tour is only as good as the listing it sits in. We tighten up your Business Profile so the tour shows where customers are searching.",
-    features: [
-      "Google Business Profile audit & setup",
-      "Category, hours & attribute optimization",
-      "Review & rating strategy",
-      "Fixes for the details that hurt your ranking",
+      "Candid + posed coverage across the event",
+      "Same-day highlight selects on request",
+      "Studio backdrop available for photo-booth style shots",
+      "Full edited gallery delivered within a week",
     ],
   },
 ];
 
 const DELIVERABLES = [
   {
-    icon: Building2,
-    title: "Business Virtual Tour",
+    icon: UserRound,
+    title: "Personal Portrait Session",
     description:
-      "A complete 360° walkthrough of your premises, built to Google's tour standard and ready to publish.",
+      "A styled, well-lit portrait built around one person — not a mass headshot batch.",
     color: "#7FB4FF",
   },
   {
-    icon: Store,
-    title: "Store View Photography",
+    icon: Briefcase,
+    title: "Team Headshot Day",
     description:
-      "Interior and storefront capture that gives shoppers a real feel for layout and atmosphere before they arrive.",
+      "The whole team shot with the same setup so every profile photo actually looks consistent.",
     color: "#7F5FFF",
   },
   {
-    icon: Map,
-    title: "Interior Mapping",
+    icon: Shirt,
+    title: "Fashion & Editorial Shoot",
     description:
-      "A connected, navigable path through your space, labeled section by section for first-time visitors.",
+      "Directed, styled shoots for lookbooks and campaigns, edited with an editorial finish.",
     color: "#FF8B6B",
   },
   {
-    icon: MapPin,
-    title: "Street View Publishing",
+    icon: PartyPopper,
+    title: "Event & Launch Coverage",
     description:
-      "Your business placed inside Street View and Maps — no plugin, no separate app to open.",
+      "Coverage of the room as it actually happens, plus posed shots where you want them.",
     color: "#4E86FF",
   },
   {
-    icon: Globe,
-    title: "Google Maps Integration",
+    icon: Camera,
+    title: "On-Location Shoots",
     description:
-      "The tour linked directly into your Maps listing, so it shows up the moment someone finds you.",
+      "Not everything has to happen in-studio — we shoot at your office, venue or chosen location too.",
     color: "#22d3ee",
   },
   {
-    icon: TrendingUp,
-    title: "Listing Optimization",
+    icon: Palette,
+    title: "Retouching & Color Grading",
     description:
-      "Profile, category and review tuning so the tour sits inside a listing that actually ranks.",
+      "Skin, tone and color corrected per shot, not run through one blanket filter for the whole set.",
     color: "#f472b6",
   },
 ];
 
-const COMPATIBLE_WITH = [
-  "Google Maps",
-  "Google Business Profile",
-  "Google Street View",
-  "Google Search",
-  "Local SEO",
-  "Mobile & Desktop",
+const DELIVERED_FOR = [
+  "LinkedIn",
+  "Instagram",
+  "Company Website",
+  "Print",
+  "Personal Portfolio",
 ];
 
 const PROCESS = [
   {
     index: "01",
-    title: "Site Visit & Planning",
+    title: "Brief & Shot List",
     description:
-      "Walk the premises, plan the capture path, and note any sections that need extra coverage.",
+      "Purpose of the shoot discussed upfront — profile photo, team batch, campaign or event — and a shot list built around it.",
   },
   {
     index: "02",
-    title: "360° Capture",
+    title: "Styling & Setup",
     description:
-      "Full interior and storefront capture using Google-certified equipment and technique.",
+      "Backdrop, lighting and posing direction prepared for the specific shoot type before anyone steps in front of the camera.",
   },
   {
     index: "03",
-    title: "Stitching & Editing",
+    title: "Shoot",
     description:
-      "Scenes stitched into one connected tour, with lighting and exposure balanced throughout.",
+      "Session run at the pace the format needs — unhurried for a portrait, fast and repeatable for a headshot batch.",
   },
   {
     index: "04",
-    title: "Google Publishing",
+    title: "Selects & Retouching",
     description:
-      "Tour submitted and published directly to Google Maps, Search and your Business Profile.",
+      "Best frames picked, then retouched individually rather than batch-filtered across the whole set.",
   },
   {
     index: "05",
-    title: "Listing Optimization",
+    title: "Delivery",
     description:
-      "Profile details tightened up so the tour shows where local customers are actually searching.",
+      "Final images delivered sized and named for wherever they're going — LinkedIn, print or the website.",
   },
 ];
 
-export function Google360VirtualTour() {
-  const [activeId, setActiveId] = useState("business-virtual-tour");
+export function StudioShoot() {
+  const [activeId, setActiveId] = useState("portrait-session");
   const activeCategory =
     SERVICE_CATEGORIES.find((c) => c.id === activeId) ?? SERVICE_CATEGORIES[0];
   const ActiveIcon = activeCategory.icon;
 
   // Autoplay: advances to the next category every 4s, starting from
-  // Business Virtual Tour. Resets on every activeId change, so a manual
-  // click just continues the cycle from wherever the user picked.
+  // Portrait Session. Resets on every activeId change, so a manual click
+  // just continues the cycle from wherever the user picked.
   useEffect(() => {
     const timer = setTimeout(() => {
       const currentIndex = SERVICE_CATEGORIES.findIndex(
@@ -250,7 +218,7 @@ export function Google360VirtualTour() {
             transition={{ duration: 0.9, ease: EASE, delay: 0.1 }}
             className="mt-6 font-display text-display-1 font-semibold text-ink sm:mt-8"
           >
-            Google 360° <span className="italic text-ion">Virtual Tour</span>
+            Studio <span className="italic text-ion">Shoot</span>
           </motion.h1>
 
           <motion.p
@@ -260,9 +228,8 @@ export function Google360VirtualTour() {
             transition={{ duration: 0.9, ease: EASE, delay: 0.25 }}
             className="mx-auto mt-6 max-w-2xl text-base text-mist sm:text-lg"
           >
-            We capture, stitch and publish your business as a certified Google
-            virtual tour — placed directly on Maps, Search and your Business
-            Profile, where local customers are already looking.
+            Portraits, team headshots, fashion and event coverage shot in a
+            proper studio setup — not a phone camera and a ring light.
           </motion.p>
 
           <motion.div
@@ -284,7 +251,7 @@ export function Google360VirtualTour() {
             transition={{ duration: 0.8, delay: 0.5 }}
             className="mt-10 flex flex-wrap items-center justify-center gap-3"
           >
-            {COMPATIBLE_WITH.map((platform) => (
+            {DELIVERED_FOR.map((platform) => (
               <span
                 key={platform}
                 className="rounded-full border border-line bg-surface/40 px-3.5 py-1.5 text-xs text-mist"
@@ -313,10 +280,10 @@ export function Google360VirtualTour() {
               </span>
             </span>
             <h2 className="mt-5 font-display text-3xl font-semibold text-ink sm:text-4xl">
-              Six parts, one tour —
+              Portrait, corporate, fashion or event —
             </h2>
             <h2 className="font-display text-3xl font-semibold text-ion sm:text-4xl">
-              pick one to see how it's built.
+              each one gets shot differently.
             </h2>
           </motion.div>
 
@@ -441,7 +408,7 @@ export function Google360VirtualTour() {
         </div>
       </section>
 
-      {/* ---------- Whole-page content: what our Google tour service includes ---------- */}
+      {/* ---------- Whole-page content: what our studio shoot service includes ---------- */}
       <section className="relative px-4 py-16 sm:px-6 sm:py-24">
         <div className="mx-auto max-w-6xl">
           <motion.div
@@ -455,10 +422,10 @@ export function Google360VirtualTour() {
               What's included
             </p>
             <h2 className="mt-4 font-display text-3xl font-semibold text-ink sm:text-4xl">
-              Everything it takes to get found,
+              From one portrait to a full
             </h2>
             <h2 className="font-display text-3xl font-semibold text-ion sm:text-4xl">
-              captured and published in one pass.
+              team, shot the same careful way.
             </h2>
           </motion.div>
 
@@ -569,13 +536,13 @@ export function Google360VirtualTour() {
             >
               <GlassPanel className="p-7 sm:p-8">
                 <h3 className="font-display text-xl font-semibold text-ink sm:text-2xl">
-                  Why businesses <span className="text-ion">work with us</span>
+                  Why people <span className="text-ion">book this studio</span>
                 </h3>
                 <ul className="mt-5 flex flex-col gap-4">
                   {[
-                    "Google-certified capture, so the tour actually gets accepted and published, not just shot.",
-                    "One visit covers capture, stitching and listing optimization — no separate steps to chase.",
-                    "Placed directly on Maps and Search, where local customers are already looking.",
+                    "Same crew handles a single portrait or a 20-person team batch without the quality dropping off.",
+                    "Retouching done per photo, not run through one filter for the whole shoot.",
+                    "We'll shoot on-location too if the space fits the brief better than the studio does.",
                   ].map((point) => (
                     <li
                       key={point}
@@ -606,9 +573,9 @@ export function Google360VirtualTour() {
             transition={{ duration: 0.9, ease: EASE }}
             className="font-display text-3xl font-semibold text-ink sm:text-5xl"
           >
-            Ready to show up
+            Ready to get
             <br className="hidden sm:block" />{" "}
-            <span className="italic text-ion">the moment they search?</span>
+            <span className="italic text-ion">in front of the camera?</span>
           </motion.h2>
           <motion.div
             initial={{ opacity: 0, y: 16 }}

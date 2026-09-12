@@ -26,7 +26,7 @@ export function GraphicDesignPortfolio() {
   return (
     <div className="relative w-full overflow-hidden">
       {/* Hero */}
-      <section className="relative z-10 mx-auto grid max-w-6xl gap-12 px-6 pb-16 pt-28 md:grid-cols-[1fr_0.9fr] md:items-center md:gap-6 md:pt-36 lg:grid-cols-[1.1fr_1fr] lg:gap-8 lg:pt-40">
+      <section className="relative z-10 mx-auto grid min-h-svh max-w-6xl items-center gap-12 px-6 pb-16 pt-28 md:grid-cols-[1fr_0.9fr] md:gap-6 md:pt-36 lg:grid-cols-[1.1fr_1fr] lg:gap-8 lg:pt-40">
         <div>
           <motion.span
             initial={{ opacity: 0, y: 12 }}

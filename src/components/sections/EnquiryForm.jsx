@@ -37,13 +37,13 @@ const CONTACT_INFO = [
     icon: MapPin,
     label: "Address",
     value:
-      "708 Capstone Building, Sharda Mandir,Crossroads, Old, Gujarat College Rd, Ellisbridge,Ahmedabad, Gujarat 380006",
+      "708 Capstone Building, Sharda Mandir Crossroads, Old Gujarat College Rd, Ellisbridge,Ahmedabad, Gujarat 380006",
   },
   {
     icon: Mail,
     label: "Email",
-    value: "info@mvmdigital.com",
-    href: "mailto:info@mvmdigital.com",
+    value: "info@mvmdigitals.com",
+    href: "mailto:info@mvmdigitals.com",
   },
   {
     icon: Phone,

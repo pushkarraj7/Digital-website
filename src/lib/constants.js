@@ -60,6 +60,14 @@ export const NAV_LINKS = [
             href: "/services/branding/product-photography",
           },
           {
+            label: "Podcast Studio Space",
+            href: "/services/branding/podcast-studio-space",
+          },
+          {
+            label: "Studio Shoot",
+            href: "/services/branding/studio-shoot",
+          },
+          {
             label: "Custom NFC Card",
             href: "/services/branding/custom-nfc-card",
           },
@@ -91,7 +99,10 @@ export const NAV_LINKS = [
         title: "Portfolio",
         items: [
           { label: "Software Portfolio", href: "/portfolio/software" },
-          { label: "Website Portfolio", href: "/portfolio/website-development" },
+          {
+            label: "Website Portfolio",
+            href: "/portfolio/website-development",
+          },
           {
             label: "Graphic Design Portfolio",
             href: "/portfolio/graphic-design",
@@ -106,16 +117,37 @@ export const NAV_LINKS = [
 ];
 
 export const COLORS = {
-  void: "#05070B",
-  deep: "#0A0F1C",
-  surface: "#0D1526",
+  void: "#070A10",
+  deep: "#0D1220",
+  surface: "#11192C",
   brand: "#0C2959",
   brandLight: "#163A73",
+  brandDark: "#081A3D",
   electric: "#4E86FF",
   ion: "#7FB4FF",
+  aurora: "#7F5FFF",
+  coral: "#FF8B6B",
   ink: "#F3F5F9",
   mist: "#8C95A8",
+  haze: "#5A6478",
 };
+
+// Single accent set — every section should pull colors from here instead
+// of inventing its own. This is what makes the site read as one system
+// instead of five different card grids with unrelated color choices.
+export const ACCENTS = ["#4E86FF", "#7FB4FF", "#7F5FFF", "#FF8B6B"];
+
+// For components needing more than 4 steps (MethodJourney's 6) — still
+// built from the same brand hues, varied by shade, not hue-hopping
+// across the color wheel like a stock icon pack.
+export const ACCENTS_EXTENDED = [
+  "#4E86FF", // electric
+  "#6C9FFF", // electric, lighter
+  "#7FB4FF", // ion
+  "#9C7FFF", // aurora, lighter
+  "#7F5FFF", // aurora
+  "#FF8B6B", // coral
+];
 
 // Zones referenced by the hero interaction. Order matters: it is the
 // narrative order the growth field cycles through when idle.

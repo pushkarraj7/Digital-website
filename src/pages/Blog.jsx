@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 
 import { EASE, viewportOnce, fadeUp, staggerChildren } from "../lib/animations";
+import { POSTS } from "../data/blogPosts";
 
 const CATEGORIES = [
   "All",
@@ -27,75 +28,6 @@ const CATEGORY_META = {
   Growth: { icon: TrendingUp, color: "#FF8B6B" },
   "Case Studies": { icon: Layers, color: "#4ADE80" },
 };
-
-const POSTS = [
-  {
-    id: "whatsapp-conversion-channel",
-    category: "Marketing",
-    title:
-      "WhatsApp is quietly becoming India's highest-converting sales channel",
-    excerpt:
-      "Open rates on email keep sliding. Here's what we've learned running WhatsApp campaigns for a dozen local businesses this year.",
-    date: "Aug 14, 2026",
-    readTime: "6 min",
-    featured: true,
-  },
-  {
-    id: "rebuild-every-18-months",
-    category: "Development",
-    title: "Why founders keep rebuilding their website every 18 months",
-    excerpt:
-      "It's rarely the tech stack. It's usually that the site never matched the business it was supposed to sell.",
-    date: "Aug 2, 2026",
-    readTime: "5 min",
-  },
-  {
-    id: "lead-gen-funnel-worth-copying",
-    category: "Growth",
-    title: "The lead-gen funnel we'd actually recommend to a friend",
-    excerpt:
-      "No 40-step automation. Three touchpoints, one clear offer, and a follow-up that doesn't sound like a robot.",
-    date: "Jul 22, 2026",
-    readTime: "7 min",
-  },
-  {
-    id: "ordering-flow-case-study",
-    category: "Case Studies",
-    title: "What changed after we rebuilt a restaurant chain's ordering flow",
-    excerpt:
-      "Average order value went up 18% without touching the menu. The fix was almost entirely about friction.",
-    date: "Jul 9, 2026",
-    readTime: "8 min",
-  },
-  {
-    id: "google-business-basics",
-    category: "Marketing",
-    title:
-      "Your Google Business listing is doing more selling than your homepage",
-    excerpt:
-      "A rundown of the five fields that actually move the needle, and the ones you can safely ignore.",
-    date: "Jun 28, 2026",
-    readTime: "4 min",
-  },
-  {
-    id: "nfc-cards-worth-it",
-    category: "Development",
-    title: "Are NFC business cards actually worth it, or just a gimmick?",
-    excerpt:
-      "We handed them out for three months and tracked what happened. The answer depends entirely on who you're meeting.",
-    date: "Jun 11, 2026",
-    readTime: "5 min",
-  },
-  {
-    id: "virtual-tour-conversion",
-    category: "Growth",
-    title: "A 360° virtual tour paid for itself in eleven days",
-    excerpt:
-      "For one client, at least. Here's the math, and the two situations where we'd tell you to skip it.",
-    date: "May 30, 2026",
-    readTime: "6 min",
-  },
-];
 
 function PostVisual({ category, seed, className = "", compact = false }) {
   const meta = CATEGORY_META[category] ?? CATEGORY_META.Marketing;

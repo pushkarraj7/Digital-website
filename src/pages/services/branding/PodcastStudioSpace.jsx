@@ -1,20 +1,17 @@
-// src/pages/services/branding/Google360VirtualTour.jsx
+// src/pages/services/branding/PodcastStudioSpace.jsx
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Sparkles,
   Layers,
-  Building2,
-  Store,
-  Map,
-  Navigation,
-  Camera,
-  Search,
+  Mic,
+  Users,
+  Video,
+  Radio,
   ArrowRight,
   CheckCircle2,
-  MapPin,
-  Globe,
-  TrendingUp,
+  Headphones,
+  Waves,
 } from "lucide-react";
 import { GlassPanel } from "../../../components/ui/GlassPanel";
 import { MagneticButton } from "../../../components/ui/MagneticButton";
@@ -29,187 +26,158 @@ import {
 // right when that tab is active.
 const SERVICE_CATEGORIES = [
   {
-    id: "business-virtual-tour",
-    label: "Business Virtual Tour",
-    icon: Building2,
-    tagline: "Let customers walk in before they ever visit.",
+    id: "solo-recording",
+    label: "Solo Recording",
+    icon: Mic,
+    tagline: "One mic, one room, zero background noise.",
     description:
-      "A full 360° walkthrough of your business, built specifically for Google — so anyone searching for you can look around before deciding to come in.",
+      "A sound-treated booth set up for a single host — clean vocal capture without the hum, echo or street noise that ruins a home setup.",
     features: [
-      "Full-premises 360° capture",
-      "Google-certified tour format",
-      "Click through from room to room, no reloading",
-      "Published directly to your Business Profile",
+      "Acoustically treated recording room",
+      "Broadcast-grade condenser mic",
+      "Pop filter & shock mount included",
+      "Room tone checked before every session",
     ],
   },
   {
-    id: "store-view-setup",
-    label: "Store View Setup",
-    icon: Store,
-    tagline: "Turn browsers into walk-ins.",
+    id: "multi-guest",
+    label: "Multi-Guest Podcast",
+    icon: Users,
+    tagline: "Up to 4 guests, each on their own clean track.",
     description:
-      "For retail and storefront businesses, a Street View-style interior gives shoppers a real look at layout, stock and atmosphere before they arrive.",
+      "A round-table setup with individual mic feeds per guest, so overlapping conversation and cross-talk don't turn into an editing headache later.",
     features: [
-      "Aisle-by-aisle interior capture",
-      "Storefront & entrance coverage",
-      "Google Maps Street View placement",
-      "Optimized for mobile browsing",
+      "Seating for up to 4 guests",
+      "Individual mic + isolated audio track per seat",
+      "Headphone monitoring for each guest",
+      "Host cue sheet & run-of-show support",
     ],
   },
   {
-    id: "interior-mapping",
-    label: "Interior Mapping",
-    icon: Map,
-    tagline: "A layout customers can actually navigate.",
+    id: "video-podcast",
+    label: "Video Podcast Shoot",
+    icon: Video,
+    tagline: "Camera angles that don't look like a Zoom call.",
     description:
-      "We map the full interior into a connected, clickable path — so a first-time visitor already knows where to go before they walk through the door.",
+      "Multi-camera coverage synced to the audio feed — wide shot, host close-up, guest close-up — cut together like the shows you're used to watching, not recording.",
     features: [
-      "Full interior floor coverage",
-      "Connected, clickable navigation path",
-      "Section & department labeling",
-      "Accurate spatial layout",
+      "3-camera coverage (wide + 2 close-ups)",
+      "Audio-synced multi-cam footage",
+      "Studio lighting for on-camera guests",
+      "B-roll & cutaway angles on request",
     ],
   },
   {
-    id: "street-view-integration",
-    label: "Street View Integration",
-    icon: Navigation,
-    tagline: "Get your business onto Google Street View, properly.",
+    id: "live-streaming",
+    label: "Live Streaming Setup",
+    icon: Radio,
+    tagline: "Record it once, go live everywhere at the same time.",
     description:
-      "Certified capture and publishing that places your business directly inside Google Street View and Maps — where local searches actually happen.",
+      "Studio feed routed straight into a multi-platform stream, so the episode goes out live on YouTube, Instagram and Spotify while it's still being recorded.",
     features: [
-      "Google Street View trusted publishing",
-      "Direct Maps & Search placement",
-      "Location pin & entrance accuracy",
-      "Ongoing visibility, no expiry",
-    ],
-  },
-  {
-    id: "virtual-tour-photography",
-    label: "Virtual Tour Photography",
-    icon: Camera,
-    tagline: "Photography built for the tour, not just for show.",
-    description:
-      "Every shot captured and lit specifically for 360° stitching — sharp, consistent, and ready to move a visitor smoothly from scene to scene.",
-    features: [
-      "Professional 360° photography",
-      "HDR-balanced lighting on every shot",
-      "Consistent exposure across scenes",
-      "High-resolution, zoom-ready images",
-    ],
-  },
-  {
-    id: "business-listing-optimization",
-    label: "Business Listing Optimization",
-    icon: Search,
-    tagline: "Make sure the tour actually gets found.",
-    description:
-      "The tour is only as good as the listing it sits in. We tighten up your Business Profile so the tour shows where customers are searching.",
-    features: [
-      "Google Business Profile audit & setup",
-      "Category, hours & attribute optimization",
-      "Review & rating strategy",
-      "Fixes for the details that hurt your ranking",
+      "Multi-platform live stream routing",
+      "On-screen guest names & lower thirds",
+      "Live audio mix monitored during the stream",
+      "Stream recording saved as a backup master",
     ],
   },
 ];
 
 const DELIVERABLES = [
   {
-    icon: Building2,
-    title: "Business Virtual Tour",
+    icon: Waves,
+    title: "Sound-Treated Recording Room",
     description:
-      "A complete 360° walkthrough of your premises, built to Google's tour standard and ready to publish.",
+      "A room actually built for voice — no boomy echo, no traffic bleeding through the walls.",
     color: "#7FB4FF",
   },
   {
-    icon: Store,
-    title: "Store View Photography",
+    icon: Video,
+    title: "Multi-Camera Video Capture",
     description:
-      "Interior and storefront capture that gives shoppers a real feel for layout and atmosphere before they arrive.",
+      "Wide and close-up angles shot together and synced, ready for a real edit — not a single static frame.",
     color: "#7F5FFF",
   },
   {
-    icon: Map,
-    title: "Interior Mapping",
+    icon: Headphones,
+    title: "Individual Mic Feeds",
     description:
-      "A connected, navigable path through your space, labeled section by section for first-time visitors.",
+      "Every host and guest recorded on their own track, so a bad line from one person doesn't ruin the whole episode.",
     color: "#FF8B6B",
   },
   {
-    icon: MapPin,
-    title: "Street View Publishing",
+    icon: Radio,
+    title: "Live Stream Routing",
     description:
-      "Your business placed inside Street View and Maps — no plugin, no separate app to open.",
+      "Go live on YouTube, Instagram and Spotify from the same session, with someone watching the levels.",
     color: "#4E86FF",
   },
   {
-    icon: Globe,
-    title: "Google Maps Integration",
+    icon: Mic,
+    title: "Raw + Edited Episode Files",
     description:
-      "The tour linked directly into your Maps listing, so it shows up the moment someone finds you.",
+      "You get the untouched multitrack files plus a mixed, edited master — use either depending on the episode.",
     color: "#22d3ee",
   },
   {
-    icon: TrendingUp,
-    title: "Listing Optimization",
+    icon: Sparkles,
+    title: "Episode Editing & Mixing",
     description:
-      "Profile, category and review tuning so the tour sits inside a listing that actually ranks.",
+      "Ums, dead air and level jumps cleaned up, with intro/outro music dropped in where you want it.",
     color: "#f472b6",
   },
 ];
 
-const COMPATIBLE_WITH = [
-  "Google Maps",
-  "Google Business Profile",
-  "Google Street View",
-  "Google Search",
-  "Local SEO",
-  "Mobile & Desktop",
+const DELIVERED_FOR = [
+  "Spotify",
+  "YouTube",
+  "Apple Podcasts",
+  "Instagram Reels",
+  "Website",
 ];
 
 const PROCESS = [
   {
     index: "01",
-    title: "Site Visit & Planning",
+    title: "Format & Slot Booking",
     description:
-      "Walk the premises, plan the capture path, and note any sections that need extra coverage.",
+      "Confirm episode format — solo, multi-guest or video — and lock in a studio slot around your recording schedule.",
   },
   {
     index: "02",
-    title: "360° Capture",
+    title: "Studio Setup for the Format",
     description:
-      "Full interior and storefront capture using Google-certified equipment and technique.",
+      "Mic count, seating and camera angles adjusted before you walk in, so setup time doesn't eat into the session.",
   },
   {
     index: "03",
-    title: "Stitching & Editing",
+    title: "Recording Session",
     description:
-      "Scenes stitched into one connected tour, with lighting and exposure balanced throughout.",
+      "Engineer present through the full session, watching levels and flagging any audio issue before it becomes a re-record.",
   },
   {
     index: "04",
-    title: "Google Publishing",
+    title: "Editing & Mixing",
     description:
-      "Tour submitted and published directly to Google Maps, Search and your Business Profile.",
+      "Multitrack audio cleaned up, leveled and mixed; video synced and rough-cut if the episode was shot on camera.",
   },
   {
     index: "05",
-    title: "Listing Optimization",
+    title: "Export & Platform Delivery",
     description:
-      "Profile details tightened up so the tour shows where local customers are actually searching.",
+      "Final files exported in the format each platform expects, ready to upload the same day.",
   },
 ];
 
-export function Google360VirtualTour() {
-  const [activeId, setActiveId] = useState("business-virtual-tour");
+export function PodcastStudioSpace() {
+  const [activeId, setActiveId] = useState("solo-recording");
   const activeCategory =
     SERVICE_CATEGORIES.find((c) => c.id === activeId) ?? SERVICE_CATEGORIES[0];
   const ActiveIcon = activeCategory.icon;
 
   // Autoplay: advances to the next category every 4s, starting from
-  // Business Virtual Tour. Resets on every activeId change, so a manual
-  // click just continues the cycle from wherever the user picked.
+  // Solo Recording. Resets on every activeId change, so a manual click
+  // just continues the cycle from wherever the user picked.
   useEffect(() => {
     const timer = setTimeout(() => {
       const currentIndex = SERVICE_CATEGORIES.findIndex(
@@ -250,7 +218,7 @@ export function Google360VirtualTour() {
             transition={{ duration: 0.9, ease: EASE, delay: 0.1 }}
             className="mt-6 font-display text-display-1 font-semibold text-ink sm:mt-8"
           >
-            Google 360° <span className="italic text-ion">Virtual Tour</span>
+            Podcast <span className="italic text-ion">Studio Space</span>
           </motion.h1>
 
           <motion.p
@@ -260,9 +228,9 @@ export function Google360VirtualTour() {
             transition={{ duration: 0.9, ease: EASE, delay: 0.25 }}
             className="mx-auto mt-6 max-w-2xl text-base text-mist sm:text-lg"
           >
-            We capture, stitch and publish your business as a certified Google
-            virtual tour — placed directly on Maps, Search and your Business
-            Profile, where local customers are already looking.
+            A sound-treated studio built for solo shows, multi-guest panels and
+            video episodes — book the room, hit record, walk out with files
+            ready to publish.
           </motion.p>
 
           <motion.div
@@ -273,7 +241,7 @@ export function Google360VirtualTour() {
             className="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row"
           >
             <MagneticButton href="/contact" className="rounded-full">
-              Get a Free Consultation
+              Book a Studio Slot
             </MagneticButton>
           </motion.div>
 
@@ -284,7 +252,7 @@ export function Google360VirtualTour() {
             transition={{ duration: 0.8, delay: 0.5 }}
             className="mt-10 flex flex-wrap items-center justify-center gap-3"
           >
-            {COMPATIBLE_WITH.map((platform) => (
+            {DELIVERED_FOR.map((platform) => (
               <span
                 key={platform}
                 className="rounded-full border border-line bg-surface/40 px-3.5 py-1.5 text-xs text-mist"
@@ -313,10 +281,10 @@ export function Google360VirtualTour() {
               </span>
             </span>
             <h2 className="mt-5 font-display text-3xl font-semibold text-ink sm:text-4xl">
-              Six parts, one tour —
+              Solo, panel, video or live —
             </h2>
             <h2 className="font-display text-3xl font-semibold text-ion sm:text-4xl">
-              pick one to see how it's built.
+              the room adjusts to the episode.
             </h2>
           </motion.div>
 
@@ -441,7 +409,7 @@ export function Google360VirtualTour() {
         </div>
       </section>
 
-      {/* ---------- Whole-page content: what our Google tour service includes ---------- */}
+      {/* ---------- Whole-page content: what our podcast studio includes ---------- */}
       <section className="relative px-4 py-16 sm:px-6 sm:py-24">
         <div className="mx-auto max-w-6xl">
           <motion.div
@@ -455,10 +423,10 @@ export function Google360VirtualTour() {
               What's included
             </p>
             <h2 className="mt-4 font-display text-3xl font-semibold text-ink sm:text-4xl">
-              Everything it takes to get found,
+              Everything the room and the crew
             </h2>
             <h2 className="font-display text-3xl font-semibold text-ion sm:text-4xl">
-              captured and published in one pass.
+              cover in a single booking.
             </h2>
           </motion.div>
 
@@ -569,13 +537,13 @@ export function Google360VirtualTour() {
             >
               <GlassPanel className="p-7 sm:p-8">
                 <h3 className="font-display text-xl font-semibold text-ink sm:text-2xl">
-                  Why businesses <span className="text-ion">work with us</span>
+                  Why podcasters <span className="text-ion">record here</span>
                 </h3>
                 <ul className="mt-5 flex flex-col gap-4">
                   {[
-                    "Google-certified capture, so the tour actually gets accepted and published, not just shot.",
-                    "One visit covers capture, stitching and listing optimization — no separate steps to chase.",
-                    "Placed directly on Maps and Search, where local customers are already looking.",
+                    "An engineer runs the session, so hosts can focus on the conversation instead of watching input levels.",
+                    "Same room handles solo, panel and video formats — no re-booking a different setup for a different episode type.",
+                    "Files delivered the same day, cut for the platform they're going out on.",
                   ].map((point) => (
                     <li
                       key={point}
@@ -606,9 +574,9 @@ export function Google360VirtualTour() {
             transition={{ duration: 0.9, ease: EASE }}
             className="font-display text-3xl font-semibold text-ink sm:text-5xl"
           >
-            Ready to show up
+            Got an episode
             <br className="hidden sm:block" />{" "}
-            <span className="italic text-ion">the moment they search?</span>
+            <span className="italic text-ion">ready to record?</span>
           </motion.h2>
           <motion.div
             initial={{ opacity: 0, y: 16 }}
@@ -618,7 +586,7 @@ export function Google360VirtualTour() {
             className="mt-9"
           >
             <MagneticButton href="/contact" className="rounded-full">
-              Start a Project <ArrowRight className="h-4 w-4" />
+              Book a Studio Slot <ArrowRight className="h-4 w-4" />
             </MagneticButton>
           </motion.div>
         </div>

@@ -5,7 +5,7 @@ import { GlassPanel } from "../ui/GlassPanel";
 const CATEGORY_META = {
   strategy: {
     label: "Strategy",
-    color: "#22d3ee",
+    color: "#4E86FF",
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -22,7 +22,7 @@ const CATEGORY_META = {
   },
   brand: {
     label: "Brand",
-    color: "#f472b6",
+    color: "#FF8B6B",
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -40,7 +40,7 @@ const CATEGORY_META = {
   },
   digital: {
     label: "Digital",
-    color: "#38bdf8",
+    color: "#7FB4FF",
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -55,7 +55,7 @@ const CATEGORY_META = {
   },
   experience: {
     label: "Experience",
-    color: "#a78bfa",
+    color: "#7F5FFF",
     icon: (
       <svg
         viewBox="0 0 24 24"

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll } from "framer-motion";
 import { Link } from "react-router-dom";
 import { NAV_LINKS } from "../../lib/constants";
 import { MagneticButton } from "../ui/MagneticButton";
@@ -13,6 +13,7 @@ export function Navbar() {
   const [hoveredGroup, setHoveredGroup] = useState(null); // title of category hovered inside a dropdown
   const [mobileExpanded, setMobileExpanded] = useState(null); // label of expanded mobile group
   const closeTimer = useRef(null);
+  const { scrollYProgress } = useScroll();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -85,12 +86,23 @@ export function Navbar() {
     >
       <nav
         className={cn(
-          "flex w-full max-w-5xl items-center justify-between rounded-full border border-line bg-void/60 backdrop-blur-xl transition-all duration-500 ease-premium",
+          "relative flex w-full max-w-5xl items-center justify-between rounded-full border border-line bg-void/60 backdrop-blur-xl transition-all duration-500 ease-premium",
           scrolled
             ? "px-3 py-2 sm:px-4 shadow-[0_8px_30px_rgba(0,0,0,0.4)]"
             : "px-4 py-3 sm:px-6 sm:py-3.5",
         )}
       >
+        {/* Clips only the progress line to the pill shape — kept separate
+            from `nav` itself so the dropdown (a sibling further down)
+            doesn't get clipped along with it. */}
+        <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-full">
+          <motion.span
+            aria-hidden="true"
+            className="absolute inset-x-0 bottom-0 h-px origin-left bg-ion/70"
+            style={{ scaleX: scrollYProgress }}
+          />
+        </div>
+
         <Link to="/" className="flex items-center" data-cursor="interactive">
           {/* <img
             src={logo}
@@ -163,7 +175,7 @@ export function Navbar() {
                       exit={{ opacity: 0, y: 8 }}
                       transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
                       onMouseLeave={() => setHoveredGroup(null)}
-                      className="absolute left-1/2 top-full mt-3 -translate-x-1/2 flex items-start rounded-2xl border border-line bg-black shadow-[0_20px_60px_rgba(0,0,0,0.5)]"
+                      className="absolute left-1/2 top-full z-50 mt-3 -translate-x-1/2 flex items-start rounded-2xl border border-line bg-black shadow-[0_20px_60px_rgba(0,0,0,0.5)]"
                     >
                       {link.groups.length === 1 ? (
                         // Single group (e.g. Portfolio) — show its items flat, no category column.

@@ -61,8 +61,8 @@ const Canvas = lazy(() =>
 const LightField = lazy(() =>
   import("./LightField").then((m) => ({ default: m.LightField })),
 );
-const ParticleField = lazy(() =>
-  import("./ParticleField").then((m) => ({ default: m.ParticleField })),
+const NeuralGrid = lazy(() =>
+  import("./NeuralGrid").then((m) => ({ default: m.NeuralGrid })),
 );
 
 /**
@@ -142,13 +142,7 @@ function GrowthFieldCanvas({ mouseRef, activeZone, className, scrollRef }) {
             color="#163A73"
             secondaryColor="#7F5FFF"
           />
-          <ParticleField
-            mouseRef={mouseRef}
-            count={count}
-            colors={["#7FB4FF", "#7F5FFF", "#FF8B6B"]}
-            activeZone={activeZone}
-            scrollRef={scrollRef}
-          />
+          <NeuralGrid mouseRef={mouseRef} />
         </Suspense>
       </Canvas>
     </div>

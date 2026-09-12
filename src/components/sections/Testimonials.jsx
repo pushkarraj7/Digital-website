@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { TESTIMONIALS } from "../../data/testimonials";
 import { EASE } from "../../lib/animations";
+import { useIsTouchDevice } from "../../hooks/useMediaQuery";
 
 const DURATION = 5000;
 const TICK = 50;
@@ -14,6 +15,7 @@ export function Testimonials() {
   const [direction, setDirection] = useState(1);
 
   const current = TESTIMONIALS[index];
+  const isTouch = useIsTouchDevice();
 
   const variants = {
     enter: (dir) => ({ opacity: 0, x: dir > 0 ? 100 : -100 }),
@@ -63,7 +65,7 @@ export function Testimonials() {
     >
       <div className="relative mx-auto max-w-3xl">
         <div className="relative rounded-2xl border border-ink/15 px-5 py-12 text-center sm:px-16 sm:py-14">
-          <span className="pointer-events-none absolute left-1 -top-10 select-none font-voice text-[90px] italic leading-none text-ink/[0.15] sm:-left-4 sm:-top-12 sm:text-[180px]">
+          <span className="pointer-events-none absolute left-1 -top-10 select-none font-display text-[90px] italic leading-none text-ink/[0.15] sm:-left-4 sm:-top-12 sm:text-[180px]">
             "
           </span>
           <button
@@ -117,6 +119,13 @@ export function Testimonials() {
                 initial="enter"
                 animate="center"
                 exit="exit"
+                drag={isTouch ? "x" : false}
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.15}
+                onDragEnd={(e, info) => {
+                  if (info.offset.x < -60) go(1);
+                  else if (info.offset.x > 60) go(-1);
+                }}
                 transition={{
                   x: { type: "spring", stiffness: 300, damping: 30 },
                   opacity: { duration: 0.25 },

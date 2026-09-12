@@ -71,7 +71,7 @@ export function WhyMVM() {
 
   return (
     <section className="relative overflow-hidden bg-void px-4 py-16 sm:px-6 sm:py-24">
-      <span className="pointer-events-none absolute -right-16 top-10 hidden select-none font-voice text-[280px] italic leading-none text-ink/[0.03] sm:block sm:text-[380px]">
+      <span className="pointer-events-none absolute -right-16 top-10 hidden select-none font-display text-[280px] italic leading-none text-ink/[0.03] sm:block sm:text-[380px]">
         "
       </span>
 
