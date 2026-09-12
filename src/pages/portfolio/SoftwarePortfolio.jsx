@@ -1166,7 +1166,7 @@ export function SoftwarePortfolio() {
         </div>
       </section>
 
-      {/* ================= Featured: iFloriana (no bg) ================= */}
+      {/* ================= Featured: Sendzyy (no bg) ================= */}
       <section className="relative z-10 px-6 pt-24 md:px-12">
         <div className="mx-auto max-w-6xl">
           <GlassPanel className="grid gap-10 overflow-hidden p-8 md:grid-cols-2 md:p-12">
@@ -1177,26 +1177,26 @@ export function SoftwarePortfolio() {
               <h2 className="mt-3 font-display text-3xl text-ink md:text-4xl">
                 Collaboration with{" "}
                 <a
-                  href="https://iflorainfo.com/"
+                  href="https://sendzyy.com/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <span className="italic text-ion">iFloriana</span>
+                  <span className="italic text-ion">Sendzyy</span>
                 </a>
               </h2>
               <p className="mt-4 text-mist">
-                We partnered with iFloriana to build a booking and business
-                management platform that unifies scheduling, staff operations,
-                and customer management across multiple locations — replacing a
-                patchwork of spreadsheets with one connected system.
+                We partnered with Sendzyy to build a WhatsApp marketing platform
+                that helps businesses run bulk campaigns, automate customer
+                conversations, and manage leads — turning WhatsApp into a
+                full-fledged growth channel instead of a one-off messaging app.
               </p>
 
               <ul className="mt-6 space-y-3">
                 {[
-                  "Multi-branch admin dashboard",
-                  "Real-time booking & staff scheduling",
-                  "Automated customer notifications",
-                  "Revenue & performance analytics",
+                  "Bulk WhatsApp campaign broadcasting",
+                  "Automated chatbot & conversation flows",
+                  "Contact & lead management dashboard",
+                  "Delivery, read & engagement analytics",
                 ].map((item) => (
                   <li
                     key={item}
@@ -1217,12 +1217,24 @@ export function SoftwarePortfolio() {
               </MagneticButton>
             </div>
 
-            <img
-              src="https://cdn.dribbble.com/userupload/46140312/file/93a2a87835eafe1a17269be7123a62c2.png?resize=%7Bwidth%7Dx%7Bheight%7D&vertical=center"
-              alt="iFloriana platform dashboard preview"
-              className="h-72 w-full rounded-2xl border border-ion/10 object-cover sm:h-80 md:h-[360px] lg:h-full"
-              loading="lazy"
-            />
+            <div className="flex h-72 w-full items-center justify-center overflow-hidden rounded-2xl border border-ion/10 bg-[#eafbf1] sm:h-80 md:h-[360px] lg:h-full">
+              <picture>
+                <source
+                  media="(min-width: 1300px)"
+                  srcSet="/src/assets/desktop.png"
+                />
+                <source
+                  media="(min-width: 700px)"
+                  srcSet="/src/assets/tablet.png"
+                />
+                <img
+                  src="/src/assets/mobile.png"
+                  alt="Sendzyy WhatsApp marketing platform preview"
+                  className="h-full w-full object-contain"
+                  loading="lazy"
+                />
+              </picture>
+            </div>
           </GlassPanel>
         </div>
 
