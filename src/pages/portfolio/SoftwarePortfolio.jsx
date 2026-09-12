@@ -1221,14 +1221,14 @@ export function SoftwarePortfolio() {
               <picture>
                 <source
                   media="(min-width: 1300px)"
-                  srcSet="/public/images/desktop.png"
+                  srcSet="/images/desktop.png"
                 />
                 <source
                   media="(min-width: 700px)"
-                  srcSet="/public/images/tablet.png"
+                  srcSet="/images/tablet.png"
                 />
                 <img
-                  src="/public/images/mobile.png"
+                  src="/images/mobile.png"
                   alt="Sendzyy WhatsApp marketing platform preview"
                   className="h-full w-full object-contain"
                   loading="lazy"
