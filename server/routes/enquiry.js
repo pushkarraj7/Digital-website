@@ -1,19 +1,13 @@
 // server/routes/enquiry.js
 import { Router } from "express";
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 import Enquiry from "../models/Enquiry.js";
 
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_APP_PASSWORD,
-  },
-});
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 function sendEnquiryEmail(enquiry) {
-  return transporter.sendMail({
-    from: `"MVM Website" <${process.env.EMAIL_USER}>`,
+  return resend.emails.send({
+    from: "MVM Website <onboarding@resend.dev>",
     to: process.env.EMAIL_TO,
     subject: `New Enquiry from ${enquiry.name}`,
     html: `
