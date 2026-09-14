@@ -7,7 +7,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 function sendEnquiryEmail(enquiry) {
   return resend.emails.send({
-    from: "MVM Website <onboarding@resend.dev>",
+    from: "MVM Website <enquiry@mvmdigitals.com>",
     to: process.env.EMAIL_TO,
     subject: `New Enquiry from ${enquiry.name}`,
     html: `
