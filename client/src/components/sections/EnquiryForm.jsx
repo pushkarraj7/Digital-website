@@ -66,6 +66,7 @@ const initialForm = {
   phone: "",
   service: "",
   message: "",
+  _hp: "",
 };
 
 function ServiceDropdown({ value, onChange }) {
@@ -219,6 +220,8 @@ function Form() {
     setForm((f) => ({ ...f, [field]: value }));
   }
 
+  // Replace the handleSubmit function inside EnquiryForm.jsx with this:
+
   async function handleSubmit(e) {
     e.preventDefault();
     setError("");
@@ -231,10 +234,13 @@ function Form() {
     setStatus("submitting");
 
     try {
-      // TODO: wire this up to a real endpoint (e.g. your backend, Formspree,
-      // or a serverless function) once one exists. For now this simulates
-      // a submission so the UI/UX can be reviewed end-to-end.
-      await new Promise((resolve) => setTimeout(resolve, 900));
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/enquiry`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...form, honeypot: form._hp || "" }),
+      });
+
+      if (!res.ok) throw new Error("Request failed");
 
       setStatus("success");
       setForm(initialForm);
@@ -274,6 +280,16 @@ function Form() {
       onSubmit={handleSubmit}
       className="w-full rounded-2xl border border-line bg-white/[0.03] p-5 text-left backdrop-blur-sm sm:p-8"
     >
+      <input
+        type="text"
+        name="_hp"
+        value={form._hp}
+        onChange={(e) => update("_hp", e.target.value)}
+        tabIndex="-1"
+        autoComplete="off"
+        style={{ position: "absolute", left: "-9999px" }}
+        aria-hidden="true"
+      />
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="flex flex-col gap-1.5">
           <label htmlFor="name" className="text-xs text-mist">
