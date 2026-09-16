@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { SERVICE_CATEGORIES } from "../../data/services";
 import { GlassPanel } from "../ui/GlassPanel";
+import { Link } from "react-router-dom";
 
 const CATEGORY_META = {
   strategy: {
@@ -324,13 +325,21 @@ export function ServicesExperience() {
                     {service.line}
                   </p>
 
-                  <div className="mt-auto flex items-center justify-end pt-3 sm:pt-6">
+                  {/* <div className="mt-auto flex items-center justify-end pt-3 sm:pt-6">
                     <a
                       href="#contact"
                       className="text-sm font-medium text-ion transition-colors hover:text-ink"
                     >
                       Read More →
                     </a>
+                  </div> */}
+                  <div className="mt-auto flex items-center justify-end pt-3 sm:pt-6">
+                    <Link
+                      to={service.path || "/#contact"}
+                      className="text-sm font-medium text-ion transition-colors hover:text-ink"
+                    >
+                      Read More →
+                    </Link>
                   </div>
                 </GlassPanel>
               </div>
